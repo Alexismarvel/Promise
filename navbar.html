@@ -248,6 +248,90 @@
       display: none;
     }
 
+    .class-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .class-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+      margin: 16px 0;
+    }
+
+    .class-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .class-label {
+      font-weight: 600;
+      color: var(--text-medium);
+      font-size: 0.9rem;
+    }
+
+    .class-value {
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .class-grid { grid-template-columns: 1fr; }
+    }
+
+    .contact-form {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .contact-form label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+    .contact-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      margin-bottom: 18px;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .contact-form input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+    }
+    .contact-form .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    .contact-form .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
     .see-more-btn {
       display: inline-flex;
       align-items: center;
@@ -480,7 +564,18 @@
     <!-- ── Contact ── -->
     <section id="section-contact" class="active-section">
       <h1>📞 Contact Us</h1>
-      <p>Have questions? Reach out to us at info@promiseszoo.com or call +1 (555) 123-4567.</p>
+      <p>Have questions? Fill out the form below and we'll get back to you.</p>
+      <form class="contact-form" onsubmit="alert('Thanks for reaching out! We will get back to you soon.');return false">
+        <label for="contact-name">Full Name</label>
+        <input type="text" id="contact-name" placeholder="Your full name" required />
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" placeholder="your@email.com" required />
+        <label for="contact-phone">Phone Number</label>
+        <input type="tel" id="contact-phone" placeholder="+1 (555) 123-4567" />
+        <label for="contact-password">Password</label>
+        <input type="password" id="contact-password" placeholder="Create a password" />
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
     </section>
 
     <!-- ── Tickets ── -->
@@ -503,6 +598,11 @@
     const animals = [
       {
         name: 'Lion', personalName: 'Simba', img: 'assets/Lion.jpg',
+        scientificName: 'Panthera leo',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Savanna, Grassland',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '10–14 yrs (wild) · 20+ yrs (captivity)',
         desc: 'The king of the savanna, lions are powerful big cats that live in prides.',
         history: `Simba was born on the warm Serengeti plains in Tanzania, the second cub of a dominant pride male named Mfalme. From the moment he opened his eyes, Simba displayed an unusual curiosity and fearlessness that set him apart from his siblings. At just three months old, he survived a fierce hyena attack that claimed his older brother — an event that forged his resilient spirit.
 
@@ -511,6 +611,11 @@
         He arrived at PromisesZOO in 2019 and has since become one of the most beloved residents. Simba is known for his deep, resonant roar that can be heard across the entire park at dawn. He shares his habitat with two lionesses, mother and daughter Nala and Kiara. Despite his imposing mane and powerful build, keepers describe Simba as a gentle giant who loves chin scratches and often presses his massive head against the enclosure fence when he sees his favorite caretaker approaching. His diet consists of 15 pounds of premium beef and chicken daily, supplemented with vitamins to keep his golden coat gleaming.` },
       {
         name: 'Tiger', personalName: 'Raja', img: 'assets/Tiger.jpg',
+        scientificName: 'Panthera tigris',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Tropical Forests, Mangroves',
+        conservationStatus: 'Endangered', diet: 'Carnivore',
+        lifespan: '8–10 yrs (wild) · 16–20 yrs (captivity)',
         desc: 'The largest cat species, known for its striking orange coat with dark stripes.',
         history: `Raja was born in a captive breeding program in India after his mother, a rescued circus tiger, was brought to a sanctuary. His distinctive stripe pattern — asymmetrical on each side like a fingerprint — made him instantly recognizable. At eight weeks old, Raja developed a respiratory infection that nearly claimed his life. Around-the-clock care from veterinarians saved him, creating a deep bond between Raja and his human caretakers.
 
@@ -519,6 +624,11 @@
         Raja's daily regimen includes a 30-minute training session where he participates in his own healthcare — presenting his paws for nail trims and opening his mouth for dental inspections. He is part of the Species Survival Plan breeding program and has fathered two cubs, both of whom have been placed in partner zoos. Raja consumes approximately 20 pounds of meat each day, and his favorite treat is raw beef knuckles.` },
       {
         name: 'Elephant', personalName: 'Tembo', img: 'assets/Elephant.jpg',
+        scientificName: 'Loxodonta africana',
+        classType: 'Mammal', order: 'Proboscidea', family: 'Elephantidae',
+        habitat: 'Savanna, Forest',
+        conservationStatus: 'Endangered', diet: 'Herbivore',
+        lifespan: '60–70 yrs',
         desc: 'The largest land animal, elephants are highly intelligent and social creatures.',
         history: `Tembo was orphaned at just two years old when his herd was caught in a violent human-wildlife conflict near Amboseli National Park in Kenya. Poachers had targeted his mother for her ivory tusks, leaving Tembo wandering aimlessly for three days before rescue teams found him standing guard over his mother's body — a sight that moved even hardened rangers to tears.
 
@@ -527,6 +637,11 @@
         Tembo arrived in 2016 and has since grown into a magnificent bull elephant weighing over 12,000 pounds. He is remarkably gentle with his keepers, using his trunk to gently explore their pockets for hidden treats. Tembo is an accomplished artist — he has learned to hold a brush with his trunk and creates abstract paintings that are sold to raise funds for wild elephant conservation. He consumes over 300 pounds of hay, fruits, and vegetables daily, and his favorite enrichment activity is dismantling oversized wooden puzzle boxes filled with melons.` },
       {
         name: 'Cheetah', personalName: 'Alexis', img: 'assets/Cheethas.jpg',
+        scientificName: 'Acinonyx jubatus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Savanna, Semi-Desert',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '10–12 yrs (wild) · 12–15 yrs (captivity)',
         desc: 'The fastest land animal, cheetahs can accelerate from 0 to 60 mph in seconds.',
         history: `Alexis was the only surviving cub in a litter of five born to a first-time mother at a breeding facility in South Africa. Her mother, unable to produce enough milk, abandoned the litter, and Alexis was hand-raised by zookeepers from the age of three days. She was bottle-fed every two hours around the clock for the first eight weeks of her life, developing an intense attachment to her human caregivers.
 
@@ -535,6 +650,11 @@
         Cheetahs are the most vulnerable of Africa's big cats, with fewer than 7,000 remaining in the wild. Alexis represents hope for her species. She has a dedicated companion dog named Max, a Labrador retriever who has been with her since she was a cub — cheetahs are naturally anxious animals, and Max provides emotional stability and confidence for Alexis. Keepers describe their bond as extraordinary, with the pair sleeping curled together and Max acting as a calming presence during public appearances. Her diet consists of lean meats supplemented with vitamins, and she eats approximately 4 pounds daily to maintain her sleek, aerodynamic build.` },
       {
         name: 'Leopard', personalName: 'Zara', img: 'assets/Leopard.jpg',
+        scientificName: 'Panthera pardus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Forests, Grasslands, Mountains',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '12–17 yrs',
         desc: 'An elusive and powerful big cat known for its spotted coat and climbing skill.',
         history: `Zara was rescued from a poacher's snare in the forests of Sri Lanka when she was just six months old. The wire trap had cut deeply into her hind leg, and by the time rescuers found her, the injury had become severely infected. Veterinarians worked for hours to save her leg, and after months of rehabilitation, Zara made a near-full recovery, though she carries a permanent scar and a slight limp.
 
@@ -543,6 +663,11 @@
         Zara is an incredibly intelligent animal who has learned to manipulate several complex enrichment devices. She can open sliding doors, manipulate puzzle feeders, and has even figured out how to turn on a water mister during hot days. Her keepers rotate her enrichment activities constantly to keep her challenged. Despite her wild nature, Zara has formed a mutual respect with her primary keeper, who she allows to administer vaccines through the enclosure bars without sedation. She eats 6 to 8 pounds of meat each day, preferring rabbit and quail to beef or chicken. Her piercing emerald eyes and elegant movements make her a favorite among photography enthusiasts who visit the park.` },
       {
         name: 'Jaguar', personalName: 'Toro', img: 'assets/Jaguar.jpg',
+        scientificName: 'Panthera onca',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Rainforest, Floodplain',
+        conservationStatus: 'Near Threatened', diet: 'Carnivore',
+        lifespan: '12–15 yrs',
         desc: 'The largest big cat in the Americas, jaguars are apex predators.',
         history: `Toro was confiscated from an illegal wildlife trafficking operation at a border crossing in Texas. He was found crammed inside a small dog carrier with two other cubs, dehydrated and frightened. The other cubs did not survive, but Toro — named for his bull-like determination — pulled through after weeks of intensive care.
 
@@ -551,6 +676,11 @@
         Toro has a powerful bite force of 1,500 pounds per square inch, capable of crushing turtle shells and cracking skulls. Despite this fearsome capability, keepers describe him as having a playful personality. He loves stalking keepers through the vegetation in his exhibit, playfully charging the glass before veering away at the last second. Toro participates in a research study on jaguar cognition and has shown remarkable problem-solving abilities, consistently ranking among the top performers in puzzle-solving tests. His diet includes beef, fish, and occasionally whole rabbits, totaling about 10 pounds daily. His striking rosette-patterned coat — spots within spots — makes him one of the most visually stunning residents of the zoo.` },
       {
         name: 'Panda', personalName: 'Mei Mei', img: 'assets/Panda.jpg',
+        scientificName: 'Ailuropoda melanoleuca',
+        classType: 'Mammal', order: 'Carnivora', family: 'Ursidae',
+        habitat: 'Bamboo Forests',
+        conservationStatus: 'Vulnerable', diet: 'Herbivore (bamboo)',
+        lifespan: '15–20 yrs (wild) · 25–30 yrs (captivity)',
         desc: 'Beloved black-and-white bears that spend most of their day eating bamboo.',
         history: `Mei Mei was born at the Chengdu Panda Base in Sichuan Province, China, to a mother who had been artificially inseminated as part of the global giant panda conservation program. She was a tiny, pink, hairless creature weighing barely 100 grams at birth — about the size of a stick of butter. Her first 100 days were critical, and she was monitored around the clock by a dedicated team of panda specialists.
 
@@ -559,6 +689,11 @@
         Mei Mei is intensely devoted to bamboo, consuming between 30 and 40 pounds each day. She is particularly fond of arrow bamboo shoots and will reject less tender stalks with an almost comical pickiness. Her favorite activity is sitting propped against a log, methodically stripping bamboo leaves with her specialized wrist bone that functions like a sixth digit. Mei Mei has a laid-back, contemplative personality — she moves slowly and deliberately, taking long naps in the crooks of trees. She has been paired with a male panda named Lung Wei as part of the breeding program, and keepers are optimistic about future cubs. Her round face, distinctive black eye patches, and gentle demeanor make her one of the most popular animals in the entire zoo.` },
       {
         name: 'Panther', personalName: 'Shadow', img: 'assets/Panther.jpg',
+        scientificName: 'Panthera pardus (melanistic)',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Forests, Rainforests',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '12–17 yrs',
         desc: 'A melanistic variant of leopards and jaguars with a sleek black coat.',
         history: `Shadow was born in a wildlife rehabilitation center in Costa Rica after his mother, a black jaguar, was found injured on the outskirts of a deforested area. Melanistic jaguars — often called black panthers — are rare, occurring in only about 6% of the jaguar population. Shadow's jet-black coat is the result of a genetic mutation that causes an excess of dark pigment, though if you look closely in the right light, you can still see his rosette patterns beneath the dark fur.
 
@@ -567,6 +702,11 @@
         Shadow has a mysterious, almost mystical presence. Visitors often stand at his enclosure for several minutes before realizing he is watching them from just a few feet away, perfectly camouflaged in darkness. He is most active during the twilight hours, pacing his territory with fluid, silent grace. Shadow's keepers describe him as having a calm but intensely observant nature. He seems to study people as much as they study him. He has formed an unlikely friendship with a barn cat that occasionally wanders into his enclosure — the two have been spotted napping in adjacent sunbeams. Shadow eats about 8 pounds of meat daily, and his favorite enrichment is scent-based — keepers say he can spend hours investigating a single unfamiliar smell.` },
       {
         name: 'Hippopotamus', personalName: 'Bubbles', img: 'assets/Hippopotamus.jpg',
+        scientificName: 'Hippopotamus amphibius',
+        classType: 'Mammal', order: 'Artiodactyla', family: 'Hippopotamidae',
+        habitat: 'Rivers, Lakes, Swamps',
+        conservationStatus: 'Vulnerable', diet: 'Herbivore',
+        lifespan: '40–50 yrs',
         desc: 'One of the largest land mammals, hippos spend most of their time in water.',
         history: `Bubbles was born during a catastrophic flood season in Zambia's Luangwa Valley. Separated from her pod when she was just days old, she was found exhausted and stranded in a mud wallow by a patrol of park rangers. At the time, she weighed only 60 pounds — a fraction of the 3,000 pounds she would eventually reach.
 
@@ -575,6 +715,11 @@
         At PromisesZOO, Bubbles lives in a spacious aquatic habitat with a 50,000-gallon pool that she dominates with her presence. Despite her enormous size and formidable jaws — hippos are responsible for more human fatalities in Africa than any other large animal — Bubbles is remarkably gentle with her keepers. She opens her massive mouth for dental inspections and allows blood draws from her ears without sedation. Her skin requires constant moisture, and she secretes a natural red oil known as blood sweat that acts as sunscreen and antibiotic. Bubbles consumes about 80 pounds of grass and hay each day, along with melons and vegetables as treats. She surfaces every few minutes to breathe automatically, even in her sleep — an instinct that never turns off. Her gaping yawns, which reveal enormous canine teeth, have become one of the most photographed sights at the zoo.` },
       {
         name: 'Baboon', personalName: 'Kato', img: 'assets/Baboon.jpg',
+        scientificName: 'Papio anubis',
+        classType: 'Mammal', order: 'Primates', family: 'Cercopithecidae',
+        habitat: 'Savanna, Woodland',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '20–30 yrs',
         desc: 'Highly social primates that live in large troops across African savannas.',
         history: `Kato was born into a large troop of olive baboons in Kenya's Masai Mara, but was rejected by his mother at just three days old — a rare but natural occurrence in baboon society. He was rescued by researchers studying the troop and transferred to a primate rehabilitation center.
 
@@ -582,8 +727,13 @@
 
         Kato is exceptionally intelligent — he has learned to use a touchscreen computer as part of a cognitive research program, identifying shapes and colors in exchange for fruit rewards. He can recognize himself in mirrors, understand cause and effect, and has even been observed what appears to be teaching younger baboons how to open stubborn enrichment devices. Kato is known for his expressive face and dramatic moods — one moment he might be grooming a subordinate, the next he could be barking warnings at a perceived threat. He maintains order in his troop through a complex network of social bonds and always eats first, a privilege he enforces with a sharp glance. Baboons are omnivores, and Kato's diet includes fruits, vegetables, nuts, seeds, insects, and occasionally small amounts of cooked meat. His canine teeth are over an inch long and are displayed prominently during status confrontations.` },
       {
-        name: 'Fox', personalName: 'Rusty', img: 'assets/Fox.jpg',
-        desc: 'Small, clever canids known for their bushy tails and adaptability.',
+        name: 'Gray Fox', personalName: 'Rusty', img: 'assets/Fox.jpg',
+        scientificName: 'Urocyon cinereoargenteus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Canidae',
+        habitat: 'Forests, Woodlands',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '6–10 yrs (wild) · 12–15 yrs (captivity)',
+        desc: 'A small, clever canid known for its bushy tail and ability to climb trees.',
         history: `Rusty was found as a tiny kit in an abandoned den in rural Oregon after his mother was killed by a coyote. He was brought to a wildlife rehabilitation center where he was raised alongside several other orphaned fox kits. Because he was handled by humans during his critical developmental window, Rusty became habituated and could not be released into the wild.
 
         He arrived at PromisesZOO's educational program in 2022 and has proven to be an exceptional ambassador for his species. Foxes are among the most adaptable mammals on Earth, found on every continent except Antarctica, and Rusty embodies this adaptability. He is equally comfortable in his naturalistic enclosure as he is visiting classrooms and community events.
@@ -591,6 +741,11 @@
         Rusty's most distinctive feature is his magnificent bushy tail, or brush, which he uses for balance, warmth, and communication. When he sleeps, he curls his tail around his body like a living blanket. His coat changes with the seasons — thicker and grayer in winter, shorter and redder in summer. Rusty has an extraordinary sense of hearing, capable of detecting a mouse squeaking from 100 feet away. In his educational presentations, he demonstrates his hunting technique by pouncing on hidden toys with dramatic precision. Rusty is known for his playful personality — he chases his own tail, plays fetch with keepers, and has a favorite squeaky toy shaped like a hedgehog that he carries everywhere. His diet includes high-quality dry dog food, raw meat, fruits, and vegetables, totaling about 1 pound daily. Despite weighing only 12 pounds, Rusty has the personality of an animal five times his size.` },
       {
         name: 'Red Fox', personalName: 'Vixen', img: 'assets/Red Fox.jpg',
+        scientificName: 'Vulpes vulpes',
+        classType: 'Mammal', order: 'Carnivora', family: 'Canidae',
+        habitat: 'Forests, Grasslands, Urban Areas',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '3–6 yrs (wild) · 10–14 yrs (captivity)',
         desc: 'The most widespread fox species, known for its striking red fur.',
         history: `Vixen was rescued from a fur farm in the Midwest where she had spent the first year of her life in a small wire cage. When the farm was shut down for animal cruelty violations, Vixen was one of 50 surviving foxes found — many had not survived the harsh conditions. She was emaciated, fearful, and had developed stereotypic pacing behaviors from the confinement.
 
@@ -599,6 +754,11 @@
         Today, Vixen is a transformed animal. Her deep red coat — the characteristic that made her a target for the fur trade — is now her crowning glory. She has a striking white-tipped tail and black stockings on her legs. Vixen is particularly active during dawn and dusk, true to her crepuscular nature. She has a complex vocabulary of vocalizations — 28 distinct sounds that researchers have cataloged — including barks, whines, and a eerie, high-pitched scream that can be startling to those hearing it for the first time. Vixen is the star of the zoo's educational programming about wildlife trafficking, serving as a living testament to why the fur trade must end. Her story has inspired thousands of visitors to support animal welfare legislation. She eats about 1.5 pounds of food daily, with a particular fondness for blueberries and raw eggs.` },
       {
         name: 'Lynx', personalName: 'Luna', img: 'assets/Lynks.jpg',
+        scientificName: 'Lynx canadensis',
+        classType: 'Mammal', order: 'Carnivora', family: 'Felidae',
+        habitat: 'Boreal Forest, Tundra',
+        conservationStatus: 'Least Concern', diet: 'Carnivore',
+        lifespan: '10–15 yrs (wild) · 15–20 yrs (captivity)',
         desc: 'A medium-sized wild cat with tufted ears and a short, bobbed tail.',
         history: `Luna was found as an orphaned kitten in the boreal forests of Canada, likely abandoned after her mother was killed by a trapper. She was barely four weeks old and weighed less than a pound when she was discovered, shivering beneath a spruce tree. Her distinctive ear tufts were barely visible, and her eyes still had the blue haze of infancy.
 
@@ -607,14 +767,483 @@
         At PromisesZOO, Luna lives in a cool, forested enclosure that mimics her native habitat. Canada lynx are specially adapted for life in the snow — their enormous, fur-covered paws act like natural snowshoes, allowing them to hunt snowshoe hares (their primary prey) even in deep powder. Luna's ear tufts are not just decorative — they enhance her hearing by funneling sound into her ears, allowing her to detect prey moving beneath snow. Her short, black-tipped bobtail is a defining feature of lynx, distinguishing them from other wild cats. Luna is remarkably heat-sensitive despite her thick fur; she spends hot days draped over cool rocks or lying in her air-conditioned den. Her keepers describe her as having a regal, aloof personality — she observes the world with a quiet intensity, rarely wasting energy on unnecessary movement. She hunts small prey items in her enclosure, practices her stalking technique on keepers (who play along), and eats about 3 pounds of meat each day. Her favorite enrichment is scent trails — keepers drag rabbit fur through her enclosure, and she follows the trail with focused determination.` },
       {
         name: 'Wolf', personalName: 'Raven', img: 'assets/Wolves.jpg',
+        scientificName: 'Canis lupus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Canidae',
+        habitat: 'Forests, Tundra, Grasslands',
+        conservationStatus: 'Least Concern', diet: 'Carnivore',
+        lifespan: '6–8 yrs (wild) · 12–15 yrs (captivity)',
         desc: 'Majestic pack hunters that roam forests and tundra across the Northern Hemisphere.',
         history: `Raven was born in a captive breeding facility dedicated to preserving the genetic diversity of gray wolves. His lineage can be traced back to wolves from the Yukon Territory, and he carries the genes of one of the largest wolf subspecies in North America. From birth, Raven displayed the characteristics of a future alpha — larger than his littermates, more confident, and possessing a deep, commanding presence.
 
         At PromisesZOO, Raven is the alpha male of a pack of seven wolves. He leads his pack with a quiet authority that requires few physical confrontations — a dominant stare or a low growl is usually enough to maintain order. Wolf pack hierarchy is complex and essential for survival. Raven eats first, leads the pack during patrols, and is the primary decision-maker for the group's movements and activities. The pack functions as a family unit, with Raven and his mate, a gray wolf named Sierra, at its center.
 
         Wolves are among the most misunderstood animals in the world. Once exterminated across much of their range, they have made a remarkable comeback thanks to conservation efforts. Raven serves as an ambassador for his kind, helping visitors understand the critical role wolves play in maintaining healthy ecosystems. When wolves were reintroduced to Yellowstone National Park in 1995, the entire ecosystem transformed — overgrazing decreased, riverbanks stabilized, and biodiversity flourished. Raven's howl is a unforgettable sound — a deep, resonant call that rises and falls, often answered by his pack in a chorus that sends chills down the spines of visitors lucky enough to hear it. He eats about 8 to 10 pounds of meat daily, and his pack's territory at the zoo spans nearly an acre of forested habitat. During full moons, the pack is particularly vocal, their ancestral instincts responding to the bright light that once guided their hunting forays across prehistoric landscapes.` },
+      {
+        name: 'Aldabra Tortoise', personalName: 'Crush', img: 'assets/Tortoise.jpg',
+        scientificName: 'Aldabrachelys gigantea',
+        classType: 'Reptile', order: 'Testudines', family: 'Testudinidae',
+        habitat: 'Island Grasslands, Mangroves',
+        conservationStatus: 'Vulnerable', diet: 'Herbivore',
+        lifespan: '80–120+ yrs',
+        desc: 'One of the largest tortoises in the world, these gentle giants can live over a century.',
+        history: `Crush hatched on Aldabra Atoll in the Seychelles, one of the most remote and pristine ecosystems on Earth. His journey began when he pipped open his leathery egg and instinctively scrambled toward the safety of dense vegetation — a journey of just a few feet that took him nearly an hour as a hatchling. At birth, he weighed only 50 grams and fit comfortably in the palm of a human hand.
+        
+        Giant tortoises are a remarkable example of island gigantism — a phenomenon where isolated island species evolve to become much larger than their mainland relatives. Aldabra is home to approximately 100,000 giant tortoises, the largest population of any giant tortoise species in the world. Crush was identified by researchers at age 3 when he was captured for a population survey; his shell was notched with a unique identification code.
+        
+        Crush arrived at PromisesZOO in 2010 as part of a conservation exchange program. He weighed 350 pounds at the time and has since doubled his size. Tortoises have an incredibly slow metabolism, which contributes to their extraordinary lifespans. Crush's heart beats only about 10 times per minute, and he can survive for up to a year without food by slowing his metabolism even further.
+        
+        Crush is known for his deliberate, philosophical demeanor. He follows the sun across his enclosure throughout the day, basking to regulate his body temperature. Despite popular belief, tortoises are not silent — Crush makes a variety of grunts, hisses, and even a surprisingly loud mating call that sounds like a rhythmic groan. His favorite foods are hibiscus flowers, prickly pear cactus pads, and the occasional watermelon treat. Crush participates in a long-term aging study, and researchers believe he could easily outlive everyone currently working at the zoo.` },
+      {
+        name: 'Scarlet Macaw', personalName: 'Blaze', img: 'assets/Makaw.jpg',
+        scientificName: 'Ara macao',
+        classType: 'Bird', order: 'Psittaciformes', family: 'Psittacidae',
+        habitat: 'Tropical Rainforest Canopy',
+        conservationStatus: 'Least Concern', diet: 'Herbivore (fruits, nuts, seeds)',
+        lifespan: '40–50 yrs (wild) · 60–80 yrs (captivity)',
+        desc: 'A brilliantly colored parrot with a vibrant red, yellow, and blue plumage.',
+        history: `Blaze was hatched in the dense canopy of Costa Rica's Corcovado National Park. From his first days, he was surrounded by the cacophony of the rainforest — howler monkeys, tree frogs, and the constant hum of insects. Macaws are born blind and featherless, completely dependent on their parents for the first three months of life. Blaze was the only surviving chick in his nest, giving him the undivided attention of both parents.
+        
+        At six months old, Blaze was captured by wildlife traffickers who targeted his nest after observing the parents' feeding patterns. He was one of 30 macaws found crammed into plastic bottles in a smuggler's backpack at San José airport. The stress of captivity had caused Blaze to pluck his own feathers — a behavior common among trafficked parrots. He was confiscated by wildlife authorities and transferred to a rescue center.
+        
+        Blaze arrived at PromisesZOO in 2018 after being deemed unreleasable due to his habituation to humans. His feather condition improved dramatically in his new home, and his brilliant scarlet plumage — the reason macaws are so heavily targeted by traffickers — returned in full glory. Macaws have zygodactyl feet (two toes forward, two backward) that function like hands, allowing them to manipulate objects with incredible dexterity.
+        
+        Blaze is one of the most intelligent animals at the zoo. He has a vocabulary of over 50 words in English and Spanish, can solve complex puzzle boxes, and has learned to mimic the sound of the zoo's coffee machine — a trick he uses to trick keepers into thinking their break is over. Macaws form pair bonds for life in the wild, and Blaze has developed an intense bond with his primary keeper, calling out in distress if she leaves his sight for too long. His diet includes fresh fruits, nuts, and specially formulated parrot pellets, with an avocado being his absolute favorite treat.` },
+      {
+        name: 'Blue Poison Dart Frog', personalName: 'Cobalt', img: 'assets/Blue poison dart frog.jpg',
+        scientificName: 'Dendrobates tinctorius azureus',
+        classType: 'Amphibian', order: 'Anura', family: 'Dendrobatidae',
+        habitat: 'Tropical Rainforest Floor',
+        conservationStatus: 'Vulnerable', diet: 'Insectivore',
+        lifespan: '4–6 yrs (wild) · 8–12 yrs (captivity)',
+        desc: 'A stunning bright-blue frog whose skin contains potent alkaloid toxins.',
+        history: `Cobalt was born in a research laboratory at the University of Guyana, part of a captive breeding program designed to reduce pressure on wild populations. Poison dart frogs are among the most toxic animals on Earth — a single golden poison dart frog carries enough batrachotoxin to kill ten grown men. The blue poison dart frog is less toxic than its golden relative but still produces enough poison to deter most predators.
+        
+        The brilliant blue coloration of Cobalt's species is an example of aposematism — warning coloration that signals toxicity to potential predators. In the wild, these frogs acquire their toxins from their diet of ants, termites, and beetles that contain specific alkaloid compounds. Captive-bred frogs like Cobalt, fed on fruit flies and crickets, do not develop potent toxins, making them safe to handle with care.
+        
+        At PromisesZOO, Cobalt lives in a meticulously maintained vivarium that replicates the microclimate of the Amazon rainforest floor. The enclosure maintains 85% humidity and temperatures between 72–80°F, with a complex layer of leaf litter, bromeliads, and moss. Cobalt is incredibly active during the day, hopping across leaves in short bursts, using his sticky toe pads to cling to vertical surfaces.
+        
+        What makes frogs like Cobalt remarkable is their life cycle — they undergo complete metamorphosis from aquatic tadpoles to terrestrial adults. In his breeding program, Cobalt has successfully fathered dozens of tadpoles. Male poison dart frogs are exceptional fathers — they guard the eggs, keep them moist, and after hatching, carry the tadpoles on their backs to separate water-filled bromeliad pools high in the canopy. Cobalt is a tiny powerhouse of personality, fearlessly investigating anything that enters his territory, including the fingers of keepers who maintain his habitat. Despite his small size — barely two inches long — his presence reminds visitors that the most extraordinary adaptations often come in the smallest packages.` },
+      {
+        name: 'Giraffe', personalName: 'Kipenzi', img: 'assets/Girrafe.jpg',
+        scientificName: 'Giraffa camelopardalis',
+        classType: 'Mammal', order: 'Artiodactyla', family: 'Giraffidae',
+        habitat: 'Savanna, Open Woodland',
+        conservationStatus: 'Vulnerable', diet: 'Herbivore',
+        lifespan: '20–25 yrs (wild) · 28–35 yrs (captivity)',
+        desc: 'The tallest land animal, giraffes use their long necks to reach foliage high in the trees.',
+        history: `Kipenzi was born on a private reserve in Kenya, her first moments a dramatic six-foot drop to the ground — a giraffe calf's first introduction to the world. She wobbled to her feet within thirty minutes, a critical survival instinct that allows calves to follow their mothers almost immediately. Her name means "beloved" in Swahili.
+        
+        Giraffes have the same number of neck vertebrae as humans — seven — but each vertebra can be up to ten inches long. Kipenzi's heart weighs over 25 pounds and pumps blood up her six-foot neck at extraordinary pressure. When she lowers her head to drink, specialized valves in her neck prevent blood from rushing to her brain.
+        
+        Kipenzi is the tallest resident at PromisesZOO at sixteen feet. She has a gentle, curious nature and spends her days browsing from acacia trees, using her eighteen-inch prehensile tongue to strip leaves from thorny branches. Her distinctive coat pattern — a mosaic of dark patches separated by lighter lines — is as unique as a human fingerprint. She formed an unlikely friendship with a zebra named Zuri, and the two are often seen grazing side by side.` },
+      {
+        name: 'Zebra', personalName: 'Zuri', img: 'assets/Zebra.jpg',
+        scientificName: 'Equus quagga',
+        classType: 'Mammal', order: 'Perissodactyla', family: 'Equidae',
+        habitat: 'Savanna, Grassland',
+        conservationStatus: 'Near Threatened', diet: 'Herbivore',
+        lifespan: '20–25 yrs (wild) · 25–30 yrs (captivity)',
+        desc: 'Iconic African equids with distinctive black-and-white striped coats.',
+        history: `Zuri was foaled during the Great Migration in the Serengeti, born into a herd of over two hundred zebras. Within minutes of birth, she was running alongside her mother, her striped coat providing effective camouflage among the moving mass of bodies — a phenomenon called motion dazzle that confuses predators like lions and hyenas.
+        
+        After a crocodile attack separated Zuri from her herd during a river crossing, she was rescued by wildlife rangers and brought to a rehabilitation center. The trauma left her wary, but in time she bonded with a young giraffe named Kipenzi, and the two became inseparable. They were relocated together to PromisesZOO in 2021.
+        
+        Zebra stripes are as unique as human fingerprints, and Zuri's bold pattern has subtle reddish-brown shadow stripes between the black — a trait of the plains zebra subspecies. Each stripe pattern helps regulate body temperature by creating micro-air currents across her skin. Zuri is spirited and strong-willed, often asserting dominance over much larger animals in her mixed-species habitat. She grazes on grass for up to eighteen hours a day and has a loud, distinctive bark-like call she uses to greet Kipenzi every morning.` },
+      {
+        name: 'Black Rhinoceros', personalName: 'Tank', img: 'assets/Rhino.jpg',
+        scientificName: 'Diceros bicornis',
+        classType: 'Mammal', order: 'Perissodactyla', family: 'Rhinocerotidae',
+        habitat: 'Savanna, Scrubland',
+        conservationStatus: 'Critically Endangered', diet: 'Herbivore',
+        lifespan: '35–45 yrs (wild) · 45–50 yrs (captivity)',
+        desc: 'A powerful armored herbivore with two prominent horns on its snout.',
+        history: `Tank was orphaned in South Africa when poachers killed his mother for her horns. He was found as a three-month-old calf standing guard over her body, too young to survive on his own. He was airlifted to a rhino orphanage where he was bottle-fed and raised alongside other orphaned rhinos, forming a surrogate herd.
+        
+        Black rhinos are not actually black — their name distinguishes them from white rhinos and may come from the dark mud they wallow in. They have a prehensile upper lip shaped like a finger, perfectly adapted for grasping leaves and branches from bushes. Tank's two horns are made of keratin — the same protein as human hair and nails — and continue growing throughout his life.
+        
+        Tank arrived at PromisesZOO in 2017 as part of a managed breeding program. He weighs over 2,500 pounds but moves with surprising speed and agility, capable of reaching 35 miles per hour in short bursts. Tank has a surprisingly sweet temperament with his keepers — he closes his eyes and leans into scratching sessions around his ears. He consumes about 120 pounds of vegetation daily and loves dust baths, which protect his skin from sunburn and parasites. His species faces an extinction crisis, with fewer than 5,000 black rhinos remaining in the wild.` },
+      {
+        name: 'Western Gorilla', personalName: 'Shujaa', img: 'assets/Gorilla.jpg',
+        scientificName: 'Gorilla gorilla',
+        classType: 'Mammal', order: 'Primates', family: 'Hominidae',
+        habitat: 'Tropical Rainforest',
+        conservationStatus: 'Critically Endangered', diet: 'Herbivore',
+        lifespan: '35–40 yrs (wild) · 40–55 yrs (captivity)',
+        desc: 'The largest living primate, a powerful yet gentle forest dwelling great ape.',
+        history: `Shujaa was born in the dense lowland forests of Cameroon, the son of a dominant silverback named Ekwoge. His early years were spent learning the complex social rules of gorilla society — chest beating displays, foraging techniques, and the intricate communication system of grunts, hoots, and gestures that gorillas use. His name means "warrior" in Swahili.
+        
+        When Shujaa was eight, his troop was caught in a crossfire between logging operations and conservation patrols. His father was killed defending the group, and Shujaa — still too young to lead — was rescued by conservationists who transferred him to a sanctuary. He struggled with the loss of his family but eventually adapted to his new environment.
+        
+        At PromisesZOO, Shujaa has grown into a magnificent silverback weighing 420 pounds. Despite his intimidating size and strength — ten times that of an average man — he is remarkably gentle, carefully grooming his keepers through the mesh and gently accepting treats from their hands. Gorillas share 98.4% of their DNA with humans, and Shujaa's intelligent brown eyes seem to hold a deep understanding. He leads a troop of five females and spends his days foraging for leafy greens, constructing elaborate sleeping nests, and, on sunny days, lying on his back contemplating the clouds.` },
+      {
+        name: 'Orangutan', personalName: 'Rama', img: 'assets/Orangatan.jpg',
+        scientificName: 'Pongo pygmaeus',
+        classType: 'Mammal', order: 'Primates', family: 'Hominidae',
+        habitat: 'Tropical Rainforest Canopy',
+        conservationStatus: 'Critically Endangered', diet: 'Herbivore',
+        lifespan: '35–45 yrs (wild) · 50–60 yrs (captivity)',
+        desc: 'Highly intelligent great apes with distinctive reddish-brown fur and long arms.',
+        history: `Rama was rescued from an illegal pet trade operation in Borneo where he was kept chained to a fruit stand. He was only two years old when authorities confiscated him, malnourished and traumatized. His mother was almost certainly killed to capture him — the tragic reality of the orangutan pet trade.
+        
+        Bornean orangutans are critically endangered, with their rainforest habitat disappearing at an alarming rate due to palm oil plantations. Rama spent four years at a rehabilitation center learning skills his mother would have taught him — identifying edible fruits, building sleeping nests, and navigating the canopy. Though he learned well, the years of human dependency made him unreleasable.
+        
+        At PromisesZOO, Rama lives in a towering habitat with ropes, platforms, and climbing structures that allow him to demonstrate his natural arboreal abilities. His arm span reaches nearly eight feet — longer than his body — allowing him to move gracefully through the treetops. Orangutans are the most solitary of the great apes, and Rama enjoys long periods of quiet contemplation, often fashioning tools from leaves and sticks to extract food from enrichment devices. He is an accomplished artist, creating abstract paintings that reflect his thoughtful, deliberate personality.` },
+      {
+        name: 'Red Kangaroo', personalName: 'Merindah', img: 'assets/Kangaroo.jpg',
+        scientificName: 'Macropus rufus',
+        classType: 'Mammal', order: 'Diprotodontia', family: 'Macropodidae',
+        habitat: 'Australian Outback, Grassland',
+        conservationStatus: 'Least Concern', diet: 'Herbivore',
+        lifespan: '8–12 yrs (wild) · 16–22 yrs (captivity)',
+        desc: 'The largest marsupial in the world, known for its powerful hind legs and hopping gait.',
+        history: `Merindah was born in the Australian outback, the size of a jellybean when she entered the world. Like all kangaroos, she crawled into her mother's pouch immediately after birth and spent the next six months nursing and developing, finally poking her head out to observe the world at four months old. Her name means "beautiful" in a native Australian language.
+        
+        Kangaroos are the only large animals that use hopping as their primary mode of locomotion. Merindah can cover 25 feet in a single bound and reach speeds of 35 miles per hour. Her powerful hind legs, long muscular tail used for balance, and efficient respiratory system — which recycles air as she bounces — make her a marvel of evolutionary engineering.
+        
+        Merindah arrived at PromisesZOO in 2022 and has a calm, inquisitive nature. She spends mornings grazing on grass and afternoons resting in the shade, her long ears swiveling independently to scan for sounds. Female kangaroos have a remarkable biological ability called embryonic diapause — they can pause a pregnancy during drought conditions until resources improve. Merindah is the matriarch of a small mob and is often seen grooming younger females, reinforcing the strong social bonds that define kangaroo society.` },
+      {
+        name: 'Koala', personalName: 'Gumleaf', img: 'assets/Koala.jpg',
+        scientificName: 'Phascolarctos cinereus',
+        classType: 'Mammal', order: 'Diprotodontia', family: 'Phascolarctidae',
+        habitat: 'Eucalyptus Forests',
+        conservationStatus: 'Vulnerable', diet: 'Herbivore (eucalyptus)',
+        lifespan: '10–12 yrs (wild) · 15–18 yrs (captivity)',
+        desc: 'A beloved arboreal marsupial that sleeps up to 20 hours a day and eats almost exclusively eucalyptus.',
+        history: `Gumleaf was found as a joey clinging to her mother's back after a bushfire swept through their habitat in Victoria, Australia. Her mother had perished from smoke inhalation, but Gumleaf survived, shielded by her mother's body. She was rushed to a wildlife hospital suffering from dehydration and minor burns on her paws.
+        
+        Koalas are highly specialized animals — their diet consists almost entirely of eucalyptus leaves, which are toxic to most other animals. Gumleaf's digestive system, including an unusually long cecum, breaks down the oils and fibers over a slow digestion process that takes up to 100 hours. This low-energy diet explains her extensive sleeping habits: she is essentially in a food coma for most of the day.
+        
+        At PromisesZOO, Gumleaf sleeps draped over a fork in her favorite eucalyptus branch for up to 20 hours daily. She wakes in the evening to feed, carefully selecting the most nutritious leaves and rejecting those with high toxin levels. Despite her sleepy exterior, Gumleaf is quite particular — she will refuse leaves picked more than 24 hours ago. Each koala has a distinct home range, and Gumleaf vigorously defends her favorite tree from any perceived intruders, vocalizing with a surprisingly deep bellow that seems impossible for such a cuddly-looking creature.` },
+      {
+        name: 'Polar Bear', personalName: 'Nanook', img: 'assets/Polar bear.jpg',
+        scientificName: 'Ursus maritimus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Ursidae',
+        habitat: 'Arctic Sea Ice, Tundra',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '20–25 yrs (wild) · 30–40 yrs (captivity)',
+        desc: 'The largest land carnivore, perfectly adapted for survival in the frozen Arctic.',
+        history: `Nanook was born in a maternity den on the sea ice of Hudson Bay, Canada, one of twin cubs born to a mother who had not eaten for five months. He emerged into the world weighing just 1.5 pounds — blind, toothless, and completely dependent. By spring, he had grown to 25 pounds on his mother's rich milk and was ready to follow her onto the sea ice.
+        
+        Polar bears are classified as marine mammals because they depend on the ocean for their survival. Nanook's scientific name means "sea bear," and his Latin name reflects his close connection to the Arctic waters. His black skin absorbs heat from the sun, while his translucent fur appears white because it scatters visible light. A thick layer of blubber insulates him from temperatures that can drop to minus 50 degrees Fahrenheit.
+        
+        At PromisesZOO, Nanook arrived after being orphaned when his mother was killed by Inuit hunters. He weighs 1,200 pounds and is a powerful swimmer, capable of covering 60 miles in a single swim. Polar bears have an extraordinary sense of smell — Nanook can detect a seal from nearly a mile away. His keepers describe him as intensely curious and highly intelligent. He solves complex puzzle feeders within minutes and has learned over 15 distinct behavioral cues for husbandry care. Climate change poses the greatest threat to his species, and Nanook serves as a powerful ambassador for Arctic conservation.` },
+      {
+        name: 'Grizzly Bear', personalName: 'Takoda', img: 'assets/Bear.jpg',
+        scientificName: 'Ursus arctos horribilis',
+        classType: 'Mammal', order: 'Carnivora', family: 'Ursidae',
+        habitat: 'Forests, Mountains, Tundra',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '20–25 yrs (wild) · 30–35 yrs (captivity)',
+        desc: 'A massive brown bear subspecies with a distinctive muscular hump on its shoulders.',
+        history: `Takoda was born in the Rocky Mountains of Montana, the sole surviving cub of a litter of three. His mother, a seasoned sow, raised him in the remote wilderness, teaching him to fish for salmon, dig for roots, and most importantly — avoid humans. His name means "friend" in the Sioux language, reflecting the hope of coexistence between bears and people.
+        
+        When Takoda was two, he was captured after repeatedly raiding campgrounds — a behavior that usually results in euthanasia. However, a local wildlife center determined he had learned the behavior from other bears and gave him a second chance. He was transferred to PromisesZOO as part of an educational program about human-wildlife conflict.
+        
+        At 800 pounds, Takoda is one of the most powerful animals at the zoo. His distinctive shoulder hump — a mass of muscle that gives grizzlies their extraordinary digging power — allows him to excavate roots and rodent burrows with ease. Despite his fearsome reputation, Takoda is an opportunistic omnivore who spends most of his day foraging for berries, roots, and salmon. He has a playful side that emerges during enrichment sessions, particularly when presented with piñatas filled with honey and nuts. His powerful jaws can crush a bowling ball, yet he takes blueberries from his keeper's fingertips with delicate precision.` },
+      {
+        name: 'Arctic Fox', personalName: 'Yuki', img: 'assets/Artic fox.jpg',
+        scientificName: 'Vulpes lagopus',
+        classType: 'Mammal', order: 'Carnivora', family: 'Canidae',
+        habitat: 'Arctic Tundra',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '3–6 yrs (wild) · 10–14 yrs (captivity)',
+        desc: 'A small, resilient fox with a pure white winter coat that turns brown in summer.',
+        history: `Yuki was born in a den on the tundra of Svalbard, Norway, one of the northernmost habitats on Earth. Her name means "snow" in Japanese, a fitting tribute to the landscape she calls home. Arctic foxes endure some of the harshest conditions on the planet, with winter temperatures dropping to minus 70 degrees Fahrenheit.
+        
+        Yuki's fur is a marvel of evolutionary adaptation — her winter coat is the warmest of any Arctic mammal, providing insulation down to minus 94 degrees. She curls into a tight ball, wrapping her bushy tail around her face like a muffler, reducing heat loss through her extremities. Her compact body, short muzzle, and small ears minimize surface area to conserve heat.
+        
+        Yuki arrived at PromisesZOO in 2023 after being injured in a trap. She has fully recovered and now serves as an educational ambassador for Arctic wildlife. She is incredibly energetic and curious, constantly exploring every corner of her enclosure. Her coat changes dramatically with the seasons — pure white in winter, and a mottled brown-gray in summer to match the tundra rocks. She can hear a lemming moving under three feet of snow and executes her signature high-arcing pounce — a hunting technique that generates enough force to break through the crusted snow and capture prey beneath.` },
+      {
+        name: 'Two-Toed Sloth', personalName: 'Slowpoke', img: 'assets/Sloth.jpg',
+        scientificName: 'Choloepus didactylus',
+        classType: 'Mammal', order: 'Pilosa', family: 'Megalonychidae',
+        habitat: 'Tropical Rainforest Canopy',
+        conservationStatus: 'Least Concern', diet: 'Herbivore',
+        lifespan: '20–25 yrs (wild) · 30–40 yrs (captivity)',
+        desc: 'The world\'s slowest mammal, spending most of its life hanging upside down in trees.',
+        history: `Slowpoke was born in the canopy of the Amazon rainforest, entering the world upside down — a sloth's default position. He emerged gripping his mother's fur instinctively, a reflex so strong that orphaned sloth infants have been known to cling to surrogate blankets or even stuffed animals. His first solid food at five months old was a Cecropia leaf, chewed and softened by his mother before passing it to him.
+        
+        Sloths have the lowest metabolic rate of any non-hibernating mammal, roughly half that of a similar-sized animal. Their body temperature can fluctuate by up to 10 degrees Fahrenheit, and they ascend from the canopy about once a week to defecate — a vulnerable ritual that remains one of biology's enduring mysteries.
+        
+        At PromisesZOO, Slowpoke lives up to his name. He moves at a deliberate pace of about six feet per minute, spending up to 20 hours a day sleeping curled in a ball at the fork of a branch. Despite his reputation for laziness, Slowpoke is an excellent swimmer — three times faster than he moves through trees. Sloths host an entire ecosystem in their fur, including algae, fungi, and moths, which gives them a greenish tint that provides camouflage. Slowpoke's favorite food is hibiscus flowers, and he has a dedicated keeper who ensures his enclosure maintains the 80-degree temperatures and high humidity he needs to thrive.` },
+      {
+        name: 'Giant Otter', personalName: 'Río', img: 'assets/Otter.jpg',
+        scientificName: 'Pteronura brasiliensis',
+        classType: 'Mammal', order: 'Carnivora', family: 'Mustelidae',
+        habitat: 'Amazon River, Wetlands',
+        conservationStatus: 'Endangered', diet: 'Carnivore (fish)',
+        lifespan: '8–10 yrs (wild) · 12–17 yrs (captivity)',
+        desc: 'The longest otter species, a highly social and vocal aquatic predator.',
+        history: `Río was born in a family group along a tributary of the Amazon River in Peru. Giant otters are among the most social of all otter species, and Río grew up surrounded by siblings, aunts, uncles, and parents — a family group that can number up to 20 individuals. He learned to swim at just two months old, his mother carrying him on her back before he developed the coordination to paddle on his own.
+        
+        Giant otters are apex predators in the Amazon waterways. Río can close his ears and nostrils when submerged, using his long whiskers — called vibrissae — to detect minute water movements made by fish. His webbed paws and powerful tail propel him through the water at remarkable speed, catching piranhas and catfish with ease.
+        
+        At PromisesZOO, Río lives in a spacious aquatic habitat with a 10,000-gallon pool and a complex filtration system that maintains pristine water quality. He is incredibly active, spending up to five hours a day swimming and playing. Giant otters have a vocabulary of over 22 distinct vocalizations, and Río is exceptionally chatty — he makes contact calls, alarm barks, and playful squeals throughout the day. He has learned to open several types of enrichment devices and particularly enjoys puzzles that require him to manipulate sliding doors. His sleek, dark brown coat has a distinctive white throat marking unique to each individual, like a fingerprint for otters.` },
+      {
+        name: 'Bottlenose Dolphin', personalName: 'Nereus', img: 'assets/Dolphin.jpg',
+        scientificName: 'Tursiops truncatus',
+        classType: 'Mammal', order: 'Cetacea', family: 'Delphinidae',
+        habitat: 'Coastal Waters, Open Ocean',
+        conservationStatus: 'Least Concern', diet: 'Carnivore (fish, squid)',
+        lifespan: '40–50 yrs (wild) · 45–55 yrs (captivity)',
+        desc: 'Highly intelligent marine mammals known for their playful behavior and complex communication.',
+        history: `Nereus was born in the warm coastal waters of the Gulf of Mexico, surfacing for his first breath within moments of birth — an instinct so powerful that dolphin calves must be pushed to the surface by their mothers immediately. He nursed underwater, his mother's milk rich in fat to help him build the blubber layer essential for marine life.
+        
+        Dolphins are among the most intelligent animals on Earth, with brains larger than humans relative to body size. Nereus communicates through a complex system of clicks, whistles, and body language. Each dolphin develops a unique signature whistle — essentially a name — that they use to identify and call to each other across vast distances. Nereus's signature whistle is a distinctive series of rising and falling tones that his trainers recognize instantly.
+        
+        At PromisesZOO, Nereus participates in daily training sessions focused on his health care. He voluntarily presents his dorsal fin for blood draws, opens his mouth for dental exams, and holds still for ultrasound scans — all behaviors taught through positive reinforcement. He is exceptionally playful, often tossing seaweed to his trainers as an invitation to play fetch. Echolocation allows Nereus to detect objects the size of a golf ball from 300 feet away, creating a three-dimensional sound picture of his environment. He eats about 25 pounds of fish daily and has been known to spit water at visitors who are not paying attention to him.` },
+      {
+        name: 'Orca', personalName: 'Kaida', img: 'assets/Orca.jpg',
+        scientificName: 'Orcinus orca',
+        classType: 'Mammal', order: 'Cetacea', family: 'Delphinidae',
+        habitat: 'All Oceans, from Polar to Tropical',
+        conservationStatus: 'Data Deficient', diet: 'Carnivore',
+        lifespan: '50–60 yrs (wild) · 35–45 yrs (captivity)',
+        desc: 'The largest member of the dolphin family, a powerful apex predator with distinctive black-and-white coloring.',
+        history: `Kaida was born into a pod of resident killer whales in the Pacific Northwest, her family unit led by her maternal grandmother — the matriarch who passed down knowledge of migration routes, hunting techniques, and social traditions accumulated over decades. Her name means "little dragon" in Japanese.
+        
+        Orcas are found in every ocean on Earth and are among the most widely distributed mammals. Different pods have distinct cultures — dialects, hunting strategies, and even food preferences passed down through generations. Kaida's pod specialized in hunting Chinook salmon, using sophisticated cooperative techniques that involved herding fish into tight balls and taking turns feeding.
+        
+        At PromisesZOO, Kaida lives in one of the largest marine habitats in North America. She is exceptionally intelligent, capable of learning complex behavioral sequences and remembering them for years. Orcas have the second-largest brain of any marine mammal, with highly developed areas for emotion and memory. Kaida communicates with her pod through dialect-specific calls — a language of clicks, whistles, and pulsed calls that researchers have been studying for decades. She reaches speeds of 35 miles per hour in short bursts and can dive to depths of 800 feet. Her towering dorsal fin, which curves distinctively, makes her instantly recognizable to her dedicated team of trainers and marine biologists.` },
+      {
+        name: 'Meerkat', personalName: 'Kibibi', img: 'assets/Meercat.jpg',
+        scientificName: 'Suricata suricatta',
+        classType: 'Mammal', order: 'Carnivora', family: 'Herpestidae',
+        habitat: 'Savanna, Semi-Desert',
+        conservationStatus: 'Least Concern', diet: 'Insectivore',
+        lifespan: '6–10 yrs (wild) · 12–15 yrs (captivity)',
+        desc: 'Small social mongooses that live in large family groups called mobs or gangs.',
+        history: `Kibibi was born in an underground burrow in the Kalahari Desert, part of a mob of 25 meerkats. Meerkat pups are born blind and helpless, relying on the entire mob for protection. Kibibi was cared for not only by her mother but by older siblings, aunts, and even unrelated helpers — all contributing to the survival of the group's young.
+        
+        Meerkats live by an intricate system of cooperation. Members take turns serving as sentinels — standing on hind legs, propped up by their tails, scanning the horizon for predators. When a sentinel spots an eagle or jackal, it issues a specific alarm call that tells the mob whether to freeze, flee to a bolthole, or mob the threat. Kibibi learned the meaning of each call before she was six weeks old.
+        
+        At PromisesZOO, Kibibi leads a mob of 15 meerkats with sharp intelligence and decisive leadership. She is the primary sentinel, spending hours each day on high alert, her dark eye patches reducing glare from the bright desert sun. Meerkats are immune to certain types of venom and have been observed teaching their young how to safely kill scorpions — removing the stinger before offering the body as a lesson. Kibibi's mob rotates through a complex network of underground tunnels, and she emerges each morning to stand on her favorite rock, facing the sun, warming her belly before the day's foraging begins.` },
+      {
+        name: 'Saltwater Crocodile', personalName: 'Brutus', img: 'assets/Crocodile.jpg',
+        scientificName: 'Crocodylus porosus',
+        classType: 'Reptile', order: 'Crocodylia', family: 'Crocodylidae',
+        habitat: 'Coastal Waters, Rivers, Mangroves',
+        conservationStatus: 'Least Concern', diet: 'Carnivore',
+        lifespan: '60–70 yrs (wild) · 70–80+ yrs (captivity)',
+        desc: 'The largest living reptile and apex predator of the Indo-Pacific, capable of taking down almost any prey.',
+        history: `Brutus hatched on a riverbank in Northern Australia, one of 50 eggs laid by his mother. He emerged from his egg by piercing the shell with a special egg tooth, instinctively calling out to alert his mother, who carried him gently to the water in her massive jaws. From that moment, he was on his own — crocodile mothers provide protection but no food or further care.
+        
+        Saltwater crocodiles are the largest reptiles on Earth, with males reaching over 20 feet and 2,200 pounds. Brutus is an impressive 17 feet long and weighs approximately 1,800 pounds. His bite force is the most powerful of any animal — over 3,700 pounds per square inch, more than three times that of a lion. Crocodiles have the most acidic stomach of any vertebrate, capable of digesting bone, shell, and horn.
+        
+        At PromisesZOO, Brutus spends most of his day floating motionless at the surface, his eyes and nostrils barely visible — a hunting posture that allows him to ambush prey with explosive speed. Crocodiles have a four-chambered heart and can remain submerged for over an hour by shunting blood away from their lungs. Brutus surprisingly enjoys tactile enrichment — his keepers use a long pole to scratch his back, and he responds by vibrating his body in what appears to be contentment. He consumes about 30 pounds of meat weekly and has grown increasingly tolerant of his primary keeper, though no one underestimates the prehistoric power resting beneath those ancient, unblinking eyes.` },
+      {
+        name: 'Komodo Dragon', personalName: 'Ora', img: 'assets/Komodo dragon.jpg',
+        scientificName: 'Varanus komodoensis',
+        classType: 'Reptile', order: 'Squamata', family: 'Varanidae',
+        habitat: 'Indonesian Islands, Savanna',
+        conservationStatus: 'Endangered', diet: 'Carnivore',
+        lifespan: '30–40 yrs (wild) · 40–50 yrs (captivity)',
+        desc: 'The largest living lizard, a formidable predator with a venomous bite.',
+        history: `Ora hatched on Komodo Island in Indonesia, one of the few places on Earth where Komodo dragons still roam wild. He emerged from his egg fully independent — unlike most reptiles, young Komodo dragons receive no parental care. He immediately scrambled up a tree to avoid being eaten by larger dragons, including his own mother, who would not hesitate to cannibalize him.
+        
+        Komodo dragons are apex predators that can take down prey as large as water buffalo. Ora hunts using a combination of serrated teeth, powerful claws, and venom — a complex cocktail of toxins that induces shock, prevents blood clotting, and drops prey into a paralytic state. For years, scientists believed bacteria in their mouths caused fatal infections, but research has confirmed that Komodo dragons possess specialized venom glands.
+        
+        At PromisesZOO, Ora is a magnificent specimen stretching 10 feet in length and weighing 175 pounds. He has a keen intelligence, recognizing individual keepers and learning the routines of the zoo. Komodo dragons have a surprising ability to track prey over long distances using their forked tongues — collecting scent particles and delivering them to the Jacobson's organ in the roof of their mouths. Ora spends his mornings basking, raising his body temperature to optimal hunting levels, and his afternoons patrolling his territory. He eats about 10 pounds of meat every two weeks and has been known to swallow entire goats in a single, gruesome feeding session.` },
+      {
+        name: 'Green Iguana', personalName: 'Sage', img: 'assets/Iguana.jpg',
+        scientificName: 'Iguana iguana',
+        classType: 'Reptile', order: 'Squamata', family: 'Iguanidae',
+        habitat: 'Tropical Rainforest, Canopy',
+        conservationStatus: 'Least Concern', diet: 'Herbivore',
+        lifespan: '12–15 yrs (wild) · 15–25 yrs (captivity)',
+        desc: 'A large arboreal lizard with a distinctive dewlap and spine crest.',
+        history: `Sage hatched on a sunny beach in Costa Rica, emerging from her egg after 90 days of incubation. She was instantly alert and mobile, the green coloration that gives her species its name providing perfect camouflage among the rainforest leaves. Her early days were a delicate balance of basking in the sun to regulate her temperature and avoiding predators.
+        
+        Iguanas have a remarkable third eye — a parietal eye on the top of their heads that doesn't form images but detects changes in light and movement, acting as an early warning system for predators approaching from above. Sage's long tail makes up two-thirds of her body length and can be detached if a predator grabs it, regrowing over time — a defense mechanism called autotomy.
+        
+        At PromisesZOO, Sage lives in a lush tropical habitat with UVB lighting, heat lamps, and plenty of climbing branches. She is a confident, curious lizard who approaches the glass when visitors stop to admire her. Iguanas are primarily herbivorous, and Sage's diet consists of dark leafy greens, squash, and occasional fruits. She communicates through visual signals — head bobs and dewlap extensions that convey dominance or submission. On warm days, Sage can be found sprawled on her favorite basking branch, her green scales absorbing the warmth that fuels her cold-blooded metabolism.` },
+      {
+        name: 'Veiled Chameleon', personalName: 'Pixel', img: 'assets/Chamelon.jpg',
+        scientificName: 'Chamaeleo calyptratus',
+        classType: 'Reptile', order: 'Squamata', family: 'Chamaeleonidae',
+        habitat: 'Mountainous Forests, Plateaus',
+        conservationStatus: 'Least Concern', diet: 'Insectivore',
+        lifespan: '4–6 yrs (wild) · 6–10 yrs (captivity)',
+        desc: 'A master of camouflage with independently rotating eyes and a lightning-fast tongue.',
+        history: `Pixel was born in the mountainous regions of Yemen, hatching from one of 30 eggs his mother buried in the sand. He emerged fully independent, a tiny replica of his parents, his body already capable of the color changes that make chameleons famous. His name reflects the millions of microscopic crystals in his skin that selectively reflect light to produce vivid colors.
+        
+        Chameleons do not change color primarily for camouflage — they use their color-changing ability to communicate emotions, regulate body temperature, and signal reproductive status. Pixel turns dark when stressed, bright green when content, and displays vivid patterns during confrontations with rivals. His eyes move independently, each capable of focusing on different objects simultaneously, giving him a 360-degree field of vision.
+        
+        At PromisesZOO, Pixel is one of the most fascinating animals to observe. His tongue extends to twice his body length in 0.07 seconds, creating suction on contact that can capture insects weighing up to 30% of his body mass. His feet are fused into two-toed pincers called zygodactyl feet, perfectly adapted for gripping branches. Pixel has a distinctive casque — a helmet-like crest on his head that helps funnel water droplets to his mouth and may play a role in mate attraction. He moves with an mesmerizing rocking gait that mimics leaves swaying in the breeze, an adaptation that makes him nearly invisible to both predators and prey.` },
+      {
+        name: 'King Cobra', personalName: 'Indra', img: 'assets/King Cobra.jpg',
+        scientificName: 'Ophiophagus hannah',
+        classType: 'Reptile', order: 'Squamata', family: 'Elapidae',
+        habitat: 'Tropical Forests, Grasslands',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore (snakes, lizards)',
+        lifespan: '15–20 yrs (wild) · 20–25 yrs (captivity)',
+        desc: 'The longest venomous snake in the world, capable of reaching 18 feet in length.',
+        history: `Indra hatched from a clutch guarded by his mother in the forests of Southeast Asia — one of the only snake species that actively protects its eggs. King cobra mothers are fiercely dedicated, coiling around their eggs for up to 90 days without eating, raising their body temperature through shivering to incubate the clutch. Indra emerged with fully functional venom glands and the instinct to hunt.
+        
+        King cobras are not actually cobras — they belong to their own genus, Ophiophagus, meaning "snake-eater." Indra's venom is not the most potent, but the volume he delivers in a single bite — up to 7 milliliters — is enough to kill an elephant. He can raise a third of his body off the ground, allowing him to look a human directly in the eye.
+        
+        At PromisesZOO, Indra lives in a carefully designed herpetarium enclosure that maintains precise temperature and humidity levels. Despite his fearsome reputation, king cobras are generally shy and avoid confrontation. Indra is handled only by the zoo's most experienced herpetologists using specialized equipment. His hood, which expands when threatened, is created by elongated ribs that flare outward, displaying false eyespots that may deter predators. King cobras communicate through a distinctive deep growl — unlike the hiss of other snakes, Indra's warning sound is a guttural rumble produced by forcing air through paired openings in his trachea. He eats a large rat every two to three weeks and is an essential part of the zoo's educational program about venomous snake conservation.` },
+      {
+        name: 'Bald Eagle', personalName: 'Liberty', img: 'assets/Bald Eagle.jpg',
+        scientificName: 'Haliaeetus leucocephalus',
+        classType: 'Bird', order: 'Accipitriformes', family: 'Accipitridae',
+        habitat: 'Lakes, Rivers, Coasts',
+        conservationStatus: 'Least Concern', diet: 'Carnivore (fish, waterfowl)',
+        lifespan: '15–20 yrs (wild) · 30–40 yrs (captivity)',
+        desc: 'The national bird of the United States, a magnificent raptor with a white head and piercing gaze.',
+        history: `Liberty hatched in a massive stick nest atop a towering pine in Alaska, one of two eggs laid by his parents. Eaglets are fiercely competitive, and Liberty's sibling did not survive the first weeks — a common reality called siblicide that ensures the stronger chick receives enough food. By three months, Liberty was fledging, his brown juvenile plumage beginning the slow transformation into the iconic white head and tail of adulthood.
+        
+        Bald eagles are not actually bald — their name comes from an old English word "balde" meaning white-headed. It takes Liberty five years to develop the full white plumage of maturity. His eyesight is extraordinary — he can spot a fish from over a mile away, and his eyes contain over a million light-sensitive cells per square millimeter of retina.
+        
+        Liberty arrived at PromisesZOO after being struck by a vehicle while feeding on roadkill. His left wing was fractured and, despite successful surgery, he can no longer sustain the powerful flight needed for survival in the wild. He has become an inspiring educational ambassador, his presence a testament to wildlife rehabilitation. Liberty's grip strength is over 400 pounds per square inch, capable of crushing the skull of his prey. He eats about 2 pounds of fish daily and has learned to fly short distances across his enclosure, delighting visitors with the shadow of his seven-foot wingspan sweeping overhead.` },
+      {
+        name: 'Indian Peacock', personalName: 'Mohan', img: 'assets/Peacock.jpg',
+        scientificName: 'Pavo cristatus',
+        classType: 'Bird', order: 'Galliformes', family: 'Phasianidae',
+        habitat: 'Forests, Grasslands, Farmlands',
+        conservationStatus: 'Least Concern', diet: 'Omnivore',
+        lifespan: '10–15 yrs (wild) · 15–25 yrs (captivity)',
+        desc: 'A stunning bird famous for its iridescent tail feathers and elaborate courtship display.',
+        history: `Mohan was born in the forests of Rajasthan, India, where peacocks are revered as sacred birds. He emerged from his egg with a plain brown plumage that provided essential camouflage during his vulnerable first months. It took three years for his magnificent train to develop — the iridescent feathers that make peacocks one of the most beautiful birds on Earth.
+        
+        The peacock's train is not actually its tail — the ornate feathers grow from the bird's back, supporting the true tail beneath. Mohan's train contains over 200 feathers, each adorned with an eye-catching ocellus — an iridescent spot that shimmers with gold, green, and blue. The optical illusion of these eyespots is created by microscopic crystal-like structures that reflect light at specific wavelengths.
+        
+        At PromisesZOO, Mohan is the undisputed showstopper of the bird exhibits. During mating season, he performs his famous dance — fanning his massive train into a shimmering semicircle, vibrating the feathers with a rustling sound that can be heard 100 yards away. Peacocks are the national bird of India and symbolize grace, beauty, and immortality. Mohan has a loud, piercing call that echoes across the zoo, especially before rain — a behavior that has earned peacocks the nickname "weather birds" in Indian folklore. He roosts high in the trees at night, safe from terrestrial predators, and his diet includes grains, insects, and the occasional snake.` },
+      {
+        name: 'Emperor Penguin', personalName: 'Frost', img: 'assets/Penguin.jpg',
+        scientificName: 'Aptenodytes forsteri',
+        classType: 'Bird', order: 'Sphenisciformes', family: 'Spheniscidae',
+        habitat: 'Antarctic Sea Ice',
+        conservationStatus: 'Near Threatened', diet: 'Carnivore (fish, krill)',
+        lifespan: '15–20 yrs (wild) · 25–35 yrs (captivity)',
+        desc: 'The tallest and heaviest penguin, enduring the harshest winter conditions on Earth.',
+        history: `Frost was born on the frozen sea ice of Antarctica in the dead of winter, one of the most extreme birthing environments on the planet. His father carefully balanced the single egg on his feet, covering it with a flap of skin called a brood pouch, for two months while his mother traveled up to 50 miles to feed at sea. Emperor penguins endure temperatures of minus 76 degrees Fahrenheit and winds of 100 miles per hour while incubating their eggs.
+        
+        Huddle behavior is critical to emperor penguin survival — Frost and his colony rotate positions continuously, each penguin spending time in the warm center before moving to the exposed edge, ensuring no individual freezes. Penguins have a remarkable ability to dive to depths of 1,800 feet, holding their breath for up to 20 minutes, their heart rate dropping to just 15 beats per minute during deep dives.
+        
+        At PromisesZOO, Frost lives in a state-of-the-art cold habitat maintained at 25 degrees Fahrenheit with a large pool for swimming. His black and white plumage is perfect countershading — black dorsal side is invisible from above against dark ocean depths, while white ventral side blends with the bright sky when viewed from below. Frost is surprisingly affectionate with his keepers, following them along the enclosure perimeter. He consumes about 5 pounds of fish daily and has perfected his iconic tobogganing — sliding on his belly across the ice, using his flippers and feet to propel himself faster than he can walk.` },
+      {
+        name: 'Great Horned Owl', personalName: 'Noctua', img: 'assets/Owl.jpg',
+        scientificName: 'Bubo virginianus',
+        classType: 'Bird', order: 'Strigiformes', family: 'Strigidae',
+        habitat: 'Forests, Mountains, Urban Areas',
+        conservationStatus: 'Least Concern', diet: 'Carnivore',
+        lifespan: '10–15 yrs (wild) · 20–30 yrs (captivity)',
+        desc: 'A powerful nocturnal raptor with distinctive ear tufts and piercing yellow eyes.',
+        history: `Noctua hatched in an abandoned hawk nest high in a cottonwood tree in Colorado, her mother fiercely defending the nest against any intruder. As a nestling, she was covered in soft gray down, her enormous eyes already open and tracking movement. Her name means "owl" in Latin, a tribute to the species' long history alongside human civilization.
+        
+        Great horned owls are among the most adaptable and widespread owls in the Americas. Noctua's "horns" are actually tufts of feathers called plumicorns, which serve as camouflage by breaking up the owl's silhouette against tree branches. Her eyes are fixed in their sockets — she must turn her head up to 270 degrees to see, a feat made possible by 14 vertebrae in her neck and a specialized blood-pooling system that keeps her brain oxygenated during rapid rotation.
+        
+        Noctua arrived at PromisesZOO after being found with a damaged wing, likely from a vehicle collision. She has become a favorite in the zoo's raptor education program. Her flight is virtually silent — specialized feather serrations break up turbulence, and a velvety surface absorbs sound. She can hear a mouse's heartbeat from 100 feet away through 30 feet of snow. Noctua's talons can exert 500 pounds per square inch of pressure, and once she grips her prey, there is no escape. She casts pellets — compacted masses of indigestible fur and bone — which her keepers collect and use in educational programs to teach about owl digestion.` },
+      {
+        name: 'American Flamingo', personalName: 'Coral', img: 'assets/Flamingo.jpg',
+        scientificName: 'Phoenicopterus ruber',
+        classType: 'Bird', order: 'Phoenicopteriformes', family: 'Phoenicopteridae',
+        habitat: 'Coastal Lagoons, Mudflats',
+        conservationStatus: 'Least Concern', diet: 'Omnivore (algae, shrimp)',
+        lifespan: '20–25 yrs (wild) · 30–50 yrs (captivity)',
+        desc: 'A striking wading bird with vibrant pink plumage and a uniquely shaped beak.',
+        history: `Coral hatched on a mudflat in the Yucatán Peninsula, her parents building a volcano-shaped nest mound that protected her egg from flooding and predators. Flamingo chicks are born gray or white — it takes years for the vibrant pink color to develop. Coral's first weeks were spent in a creche, a group of hundreds of chicks supervised by a few adults while the rest of the colony foraged.
+        
+        The brilliant pink color of flamingos comes from carotenoid pigments in their diet — primarily brine shrimp and blue-green algae. Coral's uniquely shaped beak filters food from water through specialized lamellae, like a baleen whale. She feeds with her head upside down, pumping water through her beak up to 20 times per second to capture tiny organisms.
+        
+        At PromisesZOO, Coral lives in a colony of 30 flamingos in a spacious shallow-water habitat. Flamingos perform synchronized group displays — head-flagging, wing-saluting, and marching in unison — that strengthen social bonds and stimulate breeding. Coral stands on one leg for hours at a time, a behavior that conserves body heat by reducing surface area exposed to water. She is surprisingly long-lived for a bird, with some flamingos in captivity reaching 80 years. Her pink color deepens during breeding season, signaling her health and vitality to potential mates. Coral's gentle, elegant presence brings a sense of tropical serenity to the zoo.` },
+      {
+        name: 'Toco Toucan', personalName: 'Fruitloop', img: 'assets/Toco.jpg',
+        scientificName: 'Ramphastos toco',
+        classType: 'Bird', order: 'Piciformes', family: 'Ramphastidae',
+        habitat: 'Tropical Rainforest Canopy',
+        conservationStatus: 'Least Concern', diet: 'Herbivore (fruits, berries)',
+        lifespan: '15–20 yrs (wild) · 20–25 yrs (captivity)',
+        desc: 'The largest toucan species, famous for its oversized colorful bill.',
+        history: `Fruitloop hatched in a tree cavity in the Brazilian Pantanal, emerging from his egg into the warm, humid air of the rainforest. Toucans are born with small, unremarkable bills that grow gradually over their first year. His enormous orange beak — which accounts for a third of his body length — took months to develop its full, spectacular shape.
+        
+        A toucan's bill is a marvel of biological engineering. Despite its size, it is extremely lightweight — made of keratin reinforced with a foam-like structure of calcium and protein. The bill is also a sophisticated temperature regulation system: Fruitloop can adjust blood flow to his bill to release excess heat, acting like a radiator. The serrated edges of his bill help him grip and manipulate fruit.
+        
+        At PromisesZOO, Fruitloop is an energetic and curious bird who greets visitors with a loud, croaking call that sounds surprisingly unbirdlike — more like a frog than a bird. Toucans are among the noisiest rainforest inhabitants, their calls carrying for miles through the dense canopy. Fruitloop tosses his head back to swallow fruit whole, using his long, feather-like tongue to manipulate food. He has become famous for his playful personality, often playing peek-a-boo with children who visit his enclosure. Toucans are social birds, and Fruitloop shares his habitat with a mate named Marmalade. Together they have raised three chicks, each one emerging from its egg with the same tiny beak that would one day grow into a Technicolor masterpiece.` },
+      {
+        name: 'Red-Eyed Tree Frog', personalName: 'Hermes', img: 'assets/Frog.jpg',
+        scientificName: 'Agalychnis callidryas',
+        classType: 'Amphibian', order: 'Anura', family: 'Hylidae',
+        habitat: 'Tropical Rainforest Canopy',
+        conservationStatus: 'Least Concern', diet: 'Insectivore',
+        lifespan: '3–5 yrs (wild) · 5–8 yrs (captivity)',
+        desc: 'An iconic rainforest amphibian with vivid red eyes and bright green body.',
+        history: `Hermes began his life as a clutch of gelatinous eggs laid on a leaf overhanging a pond in the Costa Rican rainforest. He developed inside the clear jelly, his tiny body visible as a dark dot, and when the tadpoles were ready to hatch, they burst from their eggs and dropped into the water below — a dramatic entrance into the world.
+        
+        The red-eyed tree frog is a master of startle coloration. When Hermes sleeps during the day, he tucks his brightly colored legs and feet against his body, closing his red eyes, appearing as a nondescript green lump on a leaf. When disturbed, he flashes his startling colors — red eyes, blue-and-yellow sides, and orange feet — freezing predators long enough for him to escape. This behavior is called deimatic display.
+        
+        At PromisesZOO, Hermes lives in a beautifully planted vivarium that mirrors his natural habitat. He is most active at night, when his huge red eyes — which lack pupils in the traditional sense and rely on a network of blood vessels for oxygen — help him see in extremely low light. His toe pads are covered in microscopic hexagonal patterns that create a capillary adhesion strong enough to support his weight on vertical surfaces. Hermes is an enthusiastic hunter, leaping to catch crickets with his sticky tongue. Despite his delicate appearance, he is a hardy survivor, and his species' explosive breeding events are one of the most spectacular phenomena in the tropical rainforest.` },
+      {
+        name: 'Axolotl', personalName: 'Neptune', img: 'assets/Axotl.jpg',
+        scientificName: 'Ambystoma mexicanum',
+        classType: 'Amphibian', order: 'Urodela', family: 'Ambystomatidae',
+        habitat: 'Lakes and Canals of Xochimilco, Mexico',
+        conservationStatus: 'Critically Endangered', diet: 'Carnivore (worms, insects)',
+        lifespan: '10–15 yrs (captivity)',
+        desc: 'A neotenic salamander that retains its larval features throughout life, including external gills.',
+        history: `Neptune was born in the ancient canal system of Xochimilco in Mexico City, the only place on Earth where axolotls exist in the wild. Unlike most amphibians, Neptune never underwent metamorphosis — he remained in his larval form his entire life, a condition called neoteny. His feathery external gills, three on each side of his head, are his most distinctive feature.
+        
+        Axolotls possess an extraordinary ability that has made them one of the most studied animals in science: they can regenerate entire body parts. Neptune can regrow limbs, tail, spinal cord tissue, parts of his brain, and even sections of his heart — without scarring. Scientists are studying axolotls to unlock the secrets of human tissue regeneration.
+        
+        At PromisesZOO, Neptune lives in a carefully maintained aquatic habitat with cool, clean water and plenty of hiding places. He is critically endangered in the wild, with fewer than 1,000 individuals remaining in Xochimilco due to habitat loss, pollution, and introduced predators. Neptune has a seemingly permanent smile, thanks to the slight upward curve of his mouth. He breathes through his feathery gills, which wave gently in the water current, and also through his skin and primitive lungs. His color is a mottled dark gray — one of several color morphs, including albino and golden. Neptune is fed earthworms and small pellets, and he has a calm, almost meditative presence that fascinates visitors of all ages.` },
+      {
+        name: 'Fire Salamander', personalName: 'Ember', img: 'assets/Fire Salamander.jpg',
+        scientificName: 'Salamandra salamandra',
+        classType: 'Amphibian', order: 'Urodela', family: 'Salamandridae',
+        habitat: 'Deciduous Forests, Near Streams',
+        conservationStatus: 'Least Concern', diet: 'Carnivore (insects, worms)',
+        lifespan: '10–15 yrs (wild) · 20–30 yrs (captivity)',
+        desc: 'A striking black-and-yellow salamander known for its toxic skin secretions.',
+        history: `Ember was born in a clear mountain stream in the Black Forest of Germany, one of 40 larvae born live from her mother — fire salamanders are one of the few salamander species that give birth to live young rather than laying eggs. She emerged as a tiny, fully aquatic larva with visible gills, beginning her life in the cool, oxygen-rich waters.
+        
+        Fire salamanders have a long association with human folklore. Their name comes from an ancient belief that they were born in flames — they were often seen emerging from logs thrown onto fires, not realizing the logs were their actual homes. Ember's vivid yellow spots on a jet-black background are aposematic coloration, warning predators that her skin contains powerful alkaloid toxins that cause muscle convulsions and respiratory distress.
+        
+        At PromisesZOO, Ember lives in a cool, moist terrarium with moss, leaf litter, and a small stream. She emerges at night to hunt, using her keen sense of smell and vibration detection to locate prey. Salamanders have an incredible sense of direction — they can navigate back to their home stream even when displaced miles away, using magnetic field detection and olfactory cues. Ember can regrow lost limbs, tail, and even parts of her eyes. She has a slow, deliberate gait, walking with her belly close to the ground, her moist skin glistening under the dim red light used to observe her nocturnal activities. She has been at the zoo for 12 years and shows no signs of slowing down — these long-lived amphibians can survive for decades with proper care.` },
+      {
+        name: 'Clownfish', personalName: 'Nemo', img: 'assets/Clownfish.jpg',
+        scientificName: 'Amphiprion ocellaris',
+        classType: 'Fish', order: 'Perciformes', family: 'Pomacentridae',
+        habitat: 'Coral Reefs',
+        conservationStatus: 'Least Concern', diet: 'Omnivore (algae, plankton)',
+        lifespan: '3–6 yrs (wild) · 6–10 yrs (captivity)',
+        desc: 'A brightly colored reef fish famous for its symbiotic relationship with sea anemones.',
+        history: `Nemo hatched from one of hundreds of eggs laid by his mother on a flat rock near their host anemone. His father tended the nest diligently, fanning the eggs with his fins to keep them oxygenated and eating any that became fungused. Within a week, Nemo emerged as a tiny larva, drifting in the ocean currents before finding his way back to the reef — guided by sound and smell — to begin his life among the stinging tentacles.
+        
+        Clownfish have a remarkable symbiotic relationship with sea anemones. A mucus layer on Nemo's body prevents the anemone's stinging cells from firing, allowing him to live safely among the venomous tentacles. In return, he lures larger fish toward the anemone, which stings and eats them, and his waste provides nutrients for the anemone.
+        
+        At PromisesZOO, Nemo lives in a 500-gallon reef tank with his host anemone and a small community of other clownfish. All clownfish are born male — when the dominant female dies, the largest male undergoes a sex change to become the new female, a fascinating adaptation called sequential hermaphroditism. Nemo is the dominant male in his group, constantly tending the anemone and defending his territory from perceived threats. He is one of the most popular fish in the aquarium, his bright orange and white bands a familiar sight to visitors of all ages. His diet includes finely chopped shrimp, squid, and vitamin-enriched brine shrimp.` },
+      {
+        name: 'Great White Shark', personalName: 'Apex', img: 'assets/Shark.jpg',
+        scientificName: 'Carcharodon carcharias',
+        classType: 'Fish', order: 'Lamniformes', family: 'Lamnidae',
+        habitat: 'Coastal and Open Oceans Worldwide',
+        conservationStatus: 'Vulnerable', diet: 'Carnivore',
+        lifespan: '30–40 yrs (wild) · not successfully kept in captivity',
+        desc: 'The largest predatory fish on Earth, an apex predator with a fearsome reputation.',
+        history: `Apex was born in the waters off South Africa, one of several pups from a single litter. Great white sharks are ovoviviparous — the eggs hatch inside the mother, and the developing pups practice intrauterine cannibalism, consuming unfertilized eggs and weaker siblings to ensure only the strongest survive. Apex emerged as one of the largest of the litter.
+        
+        Great whites are not the mindless man-eaters of popular imagination — they are intelligent, curious animals that play a crucial role in ocean ecosystems. Apex's cartilaginous skeleton is lighter than bone, allowing him to remain neutrally buoyant. His skin is covered in dermal denticles — tooth-like scales that reduce drag and allow near-silent movement through water at speeds up to 35 miles per hour.
+        
+        At PromisesZOO, Apex lives in one of the largest shark exhibits in the world — a 3-million-gallon tank with a transparent acrylic tunnel that brings visitors face to face with his twelve-foot frame. Great white sharks are exceptionally difficult to keep in captivity; most attempts have failed within weeks. Apex is one of the few great whites to thrive in a managed environment, thanks to the zoo's innovative habitat design and dedicated team of marine biologists. He has an extraordinary sense of smell, detecting one drop of blood in 25 gallons of water. His mouth contains up to 300 serrated, triangular teeth arranged in multiple rows, constantly replaced throughout his life. Despite his fearsome appearance, Apex has never shown aggression toward the divers who maintain his habitat.` },
+      {
+        name: 'Goliath Birdeater Tarantula', personalName: 'Goliath', img: 'assets/Taruntula.jpg',
+        scientificName: 'Theraphosa blondi',
+        classType: 'Arachnid', order: 'Araneae', family: 'Theraphosidae',
+        habitat: 'Tropical Rainforest Burrows',
+        conservationStatus: 'Least Concern', diet: 'Carnivore (insects, small vertebrates)',
+        lifespan: '3–6 yrs (male) · 15–25 yrs (female)',
+        desc: 'The largest spider by mass in the world, with a leg span up to 12 inches.',
+        history: `Goliath emerged from an egg sac containing hundreds of eggs, one of a massive brood that his mother guarded ferociously for weeks. Spiderlings are born miniature versions of the adults, dispersing within days to find their own territories. Most would not survive — but Goliath was one of the lucky few, finding a secure burrow in the rainforest floor of Suriname.
+        
+        Despite its name, the Goliath birdeater rarely eats birds. Goliath's diet consists mainly of insects, worms, and the occasional small rodent or frog. His fangs are up to two inches long and deliver venom that, while painful, is no more dangerous to humans than a wasp sting. His primary defense is urticating hairs — barbed bristles on his abdomen that he flicks at threats, causing intense irritation to eyes and mucous membranes.
+        
+        At PromisesZOO, Goliath lives in a terrestrial enclosure with deep substrate for burrowing, a hide log, and carefully maintained humidity. Tarantulas have an exoskeleton that they must molt to grow — Goliath undergoes this vulnerable process annually, lying on his back and emerging from his old skeleton like a living glove. He has eight eyes arranged in two clusters but relies primarily on touch and vibration to navigate his world. His body is covered in sensitive hairs that detect air currents, chemical cues, and the slightest vibrations of approaching prey. Despite public fear of spiders, Goliath is a docile, important part of the zoo's invertebrate education program, teaching visitors to appreciate even the most misunderstood creatures.` },
     ]
 
+    const classColors = {
+      Mammal: '#2d6a4f', Reptile: '#e76f51', Bird: '#219ebc', Amphibian: '#8338ec', Fish: '#3a86ff', Insect: '#ff006e', Arachnid: '#b5651d'
+    }
     const grid = document.getElementById('animalGrid')
     const seeMoreBtn = document.getElementById('seeMoreBtn')
     let showAll = false
@@ -630,9 +1259,19 @@
       modalImg.alt = animal.name
       modalBody.innerHTML = `
         <h2>${animal.personalName}</h2>
-        <span class="modal-species">${animal.name}</span>
+        <span class="modal-species">${animal.scientificName} · ${animal.name}</span>
         <h3>📋 Quick Facts</h3>
         <p>${animal.desc}</p>
+        <h3>🔬 Scientific Classification</h3>
+        <div class="class-grid">
+          <div class="class-item"><span class="class-label">Class</span><span class="class-value">${animal.classType}</span></div>
+          <div class="class-item"><span class="class-label">Order</span><span class="class-value">${animal.order}</span></div>
+          <div class="class-item"><span class="class-label">Family</span><span class="class-value">${animal.family}</span></div>
+          <div class="class-item"><span class="class-label">Habitat</span><span class="class-value">${animal.habitat}</span></div>
+          <div class="class-item"><span class="class-label">Diet</span><span class="class-value">${animal.diet}</span></div>
+          <div class="class-item"><span class="class-label">Status</span><span class="class-value">${animal.conservationStatus}</span></div>
+          <div class="class-item"><span class="class-label">Lifespan</span><span class="class-value">${animal.lifespan}</span></div>
+        </div>
         <h3>📖 Full History</h3>
         <p>${animal.history.replace(/\n\s{8}/g, '</p><p>')}</p>
       `
@@ -661,11 +1300,13 @@
         const card = document.createElement('div')
         card.className = 'animal-card'
         card.style.cursor = 'pointer'
+        const badgeColor = classColors[animal.classType] || '#6b7280'
         card.innerHTML = `
           <img src="${animal.img}" alt="${animal.name}" loading="lazy" onerror="this.style.display='none'" />
           <div class="animal-card-body">
             <h3>${animal.personalName} <span style="font-weight:400;color:var(--text-light);font-size:0.85rem">(${animal.name})</span></h3>
             <p>${animal.desc}</p>
+            <span class="class-badge" style="background:${badgeColor}">${animal.classType}</span>
           </div>
         `
         card.addEventListener('click', () => openModal(animal))
