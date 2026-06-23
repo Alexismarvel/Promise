@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Tour — PromisesZOO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-dark: #1a4d2e;
+      --primary: #2d6a4f;
+      --primary-light: #52b788;
+      --accent-yellow: #ffb703;
+      --accent-orange: #fb8500;
+      --bg-white: #ffffff;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b1b1b;
+      --text-medium: #4a4a4a;
+      --text-light: #6b7280;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+    .header-bar {
+      background: var(--primary-dark);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-bar .back-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+    .header-bar .back-link:hover { color: #fff; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .page h1 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+    .page > p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .tour-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .tour-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .tour-card h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .tour-card .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+    .tour-card p {
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .tour-card .btn-select {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.25s ease;
+    }
+    .tour-card .btn-select:hover { background: var(--primary-dark); }
+
+    .booking-form {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+    .booking-form h2 {
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 24px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .booking-form label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+    .booking-form input, .booking-form select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      margin-bottom: 18px;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .booking-form input:focus, .booking-form select:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(82,183,136,0.15);
+    }
+    .booking-form .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    .booking-form .submit-btn:hover { background: var(--accent-orange); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid #e5e7eb;
+      background: var(--bg-white);
+    }
+
+    @media (max-width: 600px) {
+      .tour-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .page h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <a href="navbar.html">
+      <span class="logo-text">PromisesZOO</span>
+    </a>
+    <a href="navbar.html" class="back-link">&larr; Back to Home</a>
+  </div>
+
+  <div class="page">
+    <h1>Book a Tour</h1>
+    <p>Choose the perfect tour for your zoo adventure. All tours include a guided experience with our expert naturalists.</p>
+
+    <div class="tour-grid">
+      <div class="tour-card">
+        <h3>Discovery Walk</h3>
+        <div class="price">$29 / person</div>
+        <p>A 90-minute guided walk through our main exhibits. Perfect for first-time visitors.</p>
+        <a href="#" class="btn-select" onclick="document.getElementById('tourSelect').value='Discovery Walk'; return false;">Select</a>
+      </div>
+      <div class="tour-card">
+        <h3>VIP Behind the Scenes</h3>
+        <div class="price">$149 / person</div>
+        <p>Go behind the enclosures, meet the keepers, and feed some of our animals.</p>
+        <a href="#" class="btn-select" onclick="document.getElementById('tourSelect').value='VIP Behind the Scenes'; return false;">Select</a>
+      </div>
+      <div class="tour-card">
+        <h3>Sunset Safari</h3>
+        <div class="price">$59 / person</div>
+        <p>Experience the zoo at dusk when the nocturnal animals come alive.</p>
+        <a href="#" class="btn-select" onclick="document.getElementById('tourSelect').value='Sunset Safari'; return false;">Select</a>
+      </div>
+      <div class="tour-card">
+        <h3>Family Fun Pass</h3>
+        <div class="price">$79 / family</div>
+        <p>Two adults and up to three children — our best value for families.</p>
+        <a href="#" class="btn-select" onclick="document.getElementById('tourSelect').value='Family Fun Pass'; return false;">Select</a>
+      </div>
+    </div>
+
+    <form class="booking-form" onsubmit="alert('Thank you! Your tour has been booked. We will send a confirmation email shortly.'); return false;">
+      <h2>Reserve Your Spot</h2>
+      <div class="form-row">
+        <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 123-4567" />
+        </div>
+        <div>
+          <label for="tourSelect">Tour Type</label>
+          <select id="tourSelect" required>
+            <option value="">Select a tour…</option>
+            <option>Discovery Walk</option>
+            <option>VIP Behind the Scenes</option>
+            <option>Sunset Safari</option>
+            <option>Family Fun Pass</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" required />
+        </div>
+        <div>
+          <label for="guests">Number of Guests</label>
+          <input type="number" id="guests" min="1" max="20" value="2" required />
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Confirm Booking</button>
+    </form>
+  </div>
+
+  <footer>&copy; 2026 PromisesZOO. All rights reserved.</footer>
+
+</body>
+</html>
