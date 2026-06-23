@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromisesZOO</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-dark: #1a4d2e;
+      --primary: #2d6a4f;
+      --primary-light: #52b788;
+      --accent-yellow: #ffb703;
+      --accent-orange: #fb8500;
+      --bg-white: #ffffff;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b1b1b;
+      --text-medium: #4a4a4a;
+      --text-light: #6b7280;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: var(--bg-light);
+      padding-top: 80px;
+    }
+
+    /* ─── Navbar ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: all 0.3s ease;
+      padding: 16px 0;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      padding: 8px 0;
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      z-index: 1001;
+    }
+
+    .logo-icon {
+      font-size: 1.8rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .logo-accent {
+      color: var(--primary-light);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 8px 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-medium);
+      border-radius: var(--radius-sm);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(45, 106, 79, 0.08);
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      background: rgba(45, 106, 79, 0.1);
+      font-weight: 600;
+    }
+
+    /* ─── Hamburger ─── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      gap: 5px;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--primary-dark);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    .nav-overlay {
+      display: none;
+    }
+
+    /* ─── Page sections ─── */
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .page-content h1 {
+      font-size: 3rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+
+    .page-content > p {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .active-section {
+      display: none;
+    }
+    .active-section.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Animal cards ─── */
+    .animal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .animal-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: all 0.35s ease;
+      text-align: left;
+    }
+
+    .animal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .animal-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .animal-card-body {
+      padding: 20px;
+    }
+
+    .animal-card-body h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .animal-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .animal-card.hidden {
+      display: none;
+    }
+
+    .see-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: var(--primary);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .see-more-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-overlay.visible {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        flex-direction: column;
+        background: var(--bg-white);
+        padding: 100px 32px 32px;
+        gap: 4px;
+        box-shadow: var(--shadow-lg);
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        align-items: stretch;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        padding: 14px 20px;
+        font-size: 1.1rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .animal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-content h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      animation: modalSlideIn 0.35s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .modal-body {
+      padding: 32px;
+    }
+
+    .modal-body h2 {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .modal-species {
+      font-size: 1rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .modal-body h3 {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--bg-light);
+    }
+
+    .modal-body p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+      margin-bottom: 12px;
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 16px;
+      float: right;
+      margin-right: 16px;
+      background: var(--bg-white);
+      border: none;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      z-index: 1;
+    }
+
+    .modal-close:hover {
+      background: #fee2e2;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+      .modal-img { height: 200px; }
+      .modal-body { padding: 20px; }
+      .modal-body h2 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="navbar-logo" data-page="home">
+        <span class="logo-icon">🦁</span>
+        <span class="logo-text">Promises<span class="logo-accent">ZOO</span></span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-overlay" id="navOverlay"></div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" data-page="home" class="active">Home</a></li>
+        <li><a href="#" data-page="about">About</a></li>
+        <li><a href="#" data-page="animals">Animals</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+        <li><a href="#" data-page="tickets">Tickets</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══ PAGES ═══ -->
+  <main class="page-content">
+
+    <!-- ── Home ── -->
+    <section id="section-home" class="active-section visible">
+      <h1>🦁 Welcome to PromisesZOO</h1>
+      <p>Discover the wonders of wildlife. A place where every visit creates unforgettable memories.</p>
+    </section>
+
+    <!-- ── About ── -->
+    <section id="section-about" class="active-section">
+      <h1>📖 About PromisesZOO</h1>
+      <p>A sanctuary built on passion, care, and conservation. Founded in 1998, we are home to over 200 species.</p>
+    </section>
+
+    <!-- ── Animals ── -->
+    <section id="section-animals" class="active-section">
+      <h1>🐯 Meet Our Animals</h1>
+      <p>Get up close with fascinating creatures from around the world</p>
+      <div class="animal-grid" id="animalGrid"></div>
+      <button class="see-more-btn" id="seeMoreBtn">See More Animals ↓</button>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section id="section-contact" class="active-section">
+      <h1>📞 Contact Us</h1>
+      <p>Have questions? Reach out to us at info@promiseszoo.com or call +1 (555) 123-4567.</p>
+    </section>
+
+    <!-- ── Tickets ── -->
+    <section id="section-tickets" class="active-section">
+      <h1>🎫 Get Your Tickets</h1>
+      <p>Choose the perfect pass for your adventure. Adult $29 | Child $19 | Family $79 | VIP $149</p>
+    </section>
+    <!-- ═══ ANIMAL MODAL ═══ -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" id="modalContent">
+        <button class="modal-close" id="modalClose">✕</button>
+        <img class="modal-img" id="modalImg" src="" alt="" />
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ── Animal data ──
+    const animals = [
+      {
+        name: 'Lion', personalName: 'Simba', img: 'assets/Lion.jpg',
+        desc: 'The king of the savanna, lions are powerful big cats that live in prides.',
+        history: `Simba was born on the warm Serengeti plains in Tanzania, the second cub of a dominant pride male named Mfalme. From the moment he opened his eyes, Simba displayed an unusual curiosity and fearlessness that set him apart from his siblings. At just three months old, he survived a fierce hyena attack that claimed his older brother — an event that forged his resilient spirit.
+
+        As a yearling, Simba was separated from his pride during a massive bushfire that swept across the savanna. He was found dehydrated and frightened by PromisesZOO rangers who were assisting with wildlife rescue efforts. After a month of rehabilitation at a field station, it was clear Simba could not be reintegrated into his original pride — the hierarchy had shifted in his absence.
+
+        He arrived at PromisesZOO in 2019 and has since become one of the most beloved residents. Simba is known for his deep, resonant roar that can be heard across the entire park at dawn. He shares his habitat with two lionesses, mother and daughter Nala and Kiara. Despite his imposing mane and powerful build, keepers describe Simba as a gentle giant who loves chin scratches and often presses his massive head against the enclosure fence when he sees his favorite caretaker approaching. His diet consists of 15 pounds of premium beef and chicken daily, supplemented with vitamins to keep his golden coat gleaming.` },
+      {
+        name: 'Tiger', personalName: 'Raja', img: 'assets/Tiger.jpg',
+        desc: 'The largest cat species, known for its striking orange coat with dark stripes.',
+        history: `Raja was born in a captive breeding program in India after his mother, a rescued circus tiger, was brought to a sanctuary. His distinctive stripe pattern — asymmetrical on each side like a fingerprint — made him instantly recognizable. At eight weeks old, Raja developed a respiratory infection that nearly claimed his life. Around-the-clock care from veterinarians saved him, creating a deep bond between Raja and his human caretakers.
+
+        He arrived at PromisesZOO in 2021 as part of an exchange program between accredited zoos. The transition was difficult — Raja spent his first two weeks hiding in the back of his enclosure, refusing food. Head keeper Maria spent hours sitting quietly near his habitat, reading aloud to him until he grew comfortable. Today, Raja is a confident, majestic tiger who loves swimming in his pool and playing with giant enrichment balls.
+
+        Raja's daily regimen includes a 30-minute training session where he participates in his own healthcare — presenting his paws for nail trims and opening his mouth for dental inspections. He is part of the Species Survival Plan breeding program and has fathered two cubs, both of whom have been placed in partner zoos. Raja consumes approximately 20 pounds of meat each day, and his favorite treat is raw beef knuckles.` },
+      {
+        name: 'Elephant', personalName: 'Tembo', img: 'assets/Elephant.jpg',
+        desc: 'The largest land animal, elephants are highly intelligent and social creatures.',
+        history: `Tembo was orphaned at just two years old when his herd was caught in a violent human-wildlife conflict near Amboseli National Park in Kenya. Poachers had targeted his mother for her ivory tusks, leaving Tembo wandering aimlessly for three days before rescue teams found him standing guard over his mother's body — a sight that moved even hardened rangers to tears.
+
+        He was airlifted to the David Sheldrick Wildlife Trust nursery in Nairobi, where he spent four years being raised alongside other orphaned elephants. Tembo developed a particularly close bond with a young elephant named Malaika, and the two were inseparable. When the decision was made to relocate Tembo to PromisesZOO as part of a managed care program, Malaika was moved as well to ensure their emotional wellbeing.
+
+        Tembo arrived in 2016 and has since grown into a magnificent bull elephant weighing over 12,000 pounds. He is remarkably gentle with his keepers, using his trunk to gently explore their pockets for hidden treats. Tembo is an accomplished artist — he has learned to hold a brush with his trunk and creates abstract paintings that are sold to raise funds for wild elephant conservation. He consumes over 300 pounds of hay, fruits, and vegetables daily, and his favorite enrichment activity is dismantling oversized wooden puzzle boxes filled with melons.` },
+      {
+        name: 'Cheetah', personalName: 'Alexis', img: 'assets/Cheethas.jpg',
+        desc: 'The fastest land animal, cheetahs can accelerate from 0 to 60 mph in seconds.',
+        history: `Alexis was the only surviving cub in a litter of five born to a first-time mother at a breeding facility in South Africa. Her mother, unable to produce enough milk, abandoned the litter, and Alexis was hand-raised by zookeepers from the age of three days. She was bottle-fed every two hours around the clock for the first eight weeks of her life, developing an intense attachment to her human caregivers.
+
+        At PromisesZOO, Alexis serves as an animal ambassador, participating in educational demonstrations that highlight cheetah conservation. She was chosen for this role because of her exceptionally calm temperament — she purrs loudly when meeting visitors and often licks the hands of children who approach her quietly. Alexis has been clocked running at 61 miles per hour on the zoo's specialized cheetah track.
+
+        Cheetahs are the most vulnerable of Africa's big cats, with fewer than 7,000 remaining in the wild. Alexis represents hope for her species. She has a dedicated companion dog named Max, a Labrador retriever who has been with her since she was a cub — cheetahs are naturally anxious animals, and Max provides emotional stability and confidence for Alexis. Keepers describe their bond as extraordinary, with the pair sleeping curled together and Max acting as a calming presence during public appearances. Her diet consists of lean meats supplemented with vitamins, and she eats approximately 4 pounds daily to maintain her sleek, aerodynamic build.` },
+      {
+        name: 'Leopard', personalName: 'Zara', img: 'assets/Leopard.jpg',
+        desc: 'An elusive and powerful big cat known for its spotted coat and climbing skill.',
+        history: `Zara was rescued from a poacher's snare in the forests of Sri Lanka when she was just six months old. The wire trap had cut deeply into her hind leg, and by the time rescuers found her, the injury had become severely infected. Veterinarians worked for hours to save her leg, and after months of rehabilitation, Zara made a near-full recovery, though she carries a permanent scar and a slight limp.
+
+        She arrived at PromisesZOO in 2020 and quickly claimed the highest platforms in her enclosure — leopards are arboreal by nature, and Zara spends most of her day draped gracefully over branches 15 feet above ground, observing visitors with quiet intensity. Her spotted coat provides perfect camouflage among the dappled light of her habitat.
+
+        Zara is an incredibly intelligent animal who has learned to manipulate several complex enrichment devices. She can open sliding doors, manipulate puzzle feeders, and has even figured out how to turn on a water mister during hot days. Her keepers rotate her enrichment activities constantly to keep her challenged. Despite her wild nature, Zara has formed a mutual respect with her primary keeper, who she allows to administer vaccines through the enclosure bars without sedation. She eats 6 to 8 pounds of meat each day, preferring rabbit and quail to beef or chicken. Her piercing emerald eyes and elegant movements make her a favorite among photography enthusiasts who visit the park.` },
+      {
+        name: 'Jaguar', personalName: 'Toro', img: 'assets/Jaguar.jpg',
+        desc: 'The largest big cat in the Americas, jaguars are apex predators.',
+        history: `Toro was confiscated from an illegal wildlife trafficking operation at a border crossing in Texas. He was found crammed inside a small dog carrier with two other cubs, dehydrated and frightened. The other cubs did not survive, but Toro — named for his bull-like determination — pulled through after weeks of intensive care.
+
+        Jaguars once roamed from the southern United States to Argentina, but habitat loss and poaching have eliminated them from over 50% of their historical range. Toro represents the wild spirit of the Amazon. At PromisesZOO, he lives in a lush habitat designed to mimic the flooded forests of the Pantanal, complete with a deep pool that he uses constantly — jaguars are excellent swimmers and often hunt caiman and fish in the wild.
+
+        Toro has a powerful bite force of 1,500 pounds per square inch, capable of crushing turtle shells and cracking skulls. Despite this fearsome capability, keepers describe him as having a playful personality. He loves stalking keepers through the vegetation in his exhibit, playfully charging the glass before veering away at the last second. Toro participates in a research study on jaguar cognition and has shown remarkable problem-solving abilities, consistently ranking among the top performers in puzzle-solving tests. His diet includes beef, fish, and occasionally whole rabbits, totaling about 10 pounds daily. His striking rosette-patterned coat — spots within spots — makes him one of the most visually stunning residents of the zoo.` },
+      {
+        name: 'Panda', personalName: 'Mei Mei', img: 'assets/Panda.jpg',
+        desc: 'Beloved black-and-white bears that spend most of their day eating bamboo.',
+        history: `Mei Mei was born at the Chengdu Panda Base in Sichuan Province, China, to a mother who had been artificially inseminated as part of the global giant panda conservation program. She was a tiny, pink, hairless creature weighing barely 100 grams at birth — about the size of a stick of butter. Her first 100 days were critical, and she was monitored around the clock by a dedicated team of panda specialists.
+
+        At PromisesZOO, Mei Mei has become an icon of conservation success. Giant pandas were once on the brink of extinction, with fewer than 1,000 individuals in the wild. Today, thanks to breeding programs like the one that produced Mei Mei, wild populations have rebounded to over 1,800. She is living proof that dedicated conservation efforts can reverse the fortunes of endangered species.
+
+        Mei Mei is intensely devoted to bamboo, consuming between 30 and 40 pounds each day. She is particularly fond of arrow bamboo shoots and will reject less tender stalks with an almost comical pickiness. Her favorite activity is sitting propped against a log, methodically stripping bamboo leaves with her specialized wrist bone that functions like a sixth digit. Mei Mei has a laid-back, contemplative personality — she moves slowly and deliberately, taking long naps in the crooks of trees. She has been paired with a male panda named Lung Wei as part of the breeding program, and keepers are optimistic about future cubs. Her round face, distinctive black eye patches, and gentle demeanor make her one of the most popular animals in the entire zoo.` },
+      {
+        name: 'Panther', personalName: 'Shadow', img: 'assets/Panther.jpg',
+        desc: 'A melanistic variant of leopards and jaguars with a sleek black coat.',
+        history: `Shadow was born in a wildlife rehabilitation center in Costa Rica after his mother, a black jaguar, was found injured on the outskirts of a deforested area. Melanistic jaguars — often called black panthers — are rare, occurring in only about 6% of the jaguar population. Shadow's jet-black coat is the result of a genetic mutation that causes an excess of dark pigment, though if you look closely in the right light, you can still see his rosette patterns beneath the dark fur.
+
+        Shadow was hand-raised after his mother succumbed to her injuries. He developed a deep trust in humans during this critical period, which made him unsuitable for release into the wild but perfect for an accredited zoological setting. He arrived at PromisesZOO in 2019 and has since become known as the ghost of the zoo — his black coat makes him nearly invisible in the shadows of his enclosure.
+
+        Shadow has a mysterious, almost mystical presence. Visitors often stand at his enclosure for several minutes before realizing he is watching them from just a few feet away, perfectly camouflaged in darkness. He is most active during the twilight hours, pacing his territory with fluid, silent grace. Shadow's keepers describe him as having a calm but intensely observant nature. He seems to study people as much as they study him. He has formed an unlikely friendship with a barn cat that occasionally wanders into his enclosure — the two have been spotted napping in adjacent sunbeams. Shadow eats about 8 pounds of meat daily, and his favorite enrichment is scent-based — keepers say he can spend hours investigating a single unfamiliar smell.` },
+      {
+        name: 'Hippopotamus', personalName: 'Bubbles', img: 'assets/Hippopotamus.jpg',
+        desc: 'One of the largest land mammals, hippos spend most of their time in water.',
+        history: `Bubbles was born during a catastrophic flood season in Zambia's Luangwa Valley. Separated from her pod when she was just days old, she was found exhausted and stranded in a mud wallow by a patrol of park rangers. At the time, she weighed only 60 pounds — a fraction of the 3,000 pounds she would eventually reach.
+
+        She was transported to an elephant orphanage that agreed to take her in, where she was raised alongside baby elephants. Bubbles seemed to think she was an elephant for the first year of her life, attempting to mimic their trumpeting calls and trying to use her snout to pick up objects like trunks. The elephants accepted her as one of their own, and keepers had to work carefully to gradually introduce her to other hippos.
+
+        At PromisesZOO, Bubbles lives in a spacious aquatic habitat with a 50,000-gallon pool that she dominates with her presence. Despite her enormous size and formidable jaws — hippos are responsible for more human fatalities in Africa than any other large animal — Bubbles is remarkably gentle with her keepers. She opens her massive mouth for dental inspections and allows blood draws from her ears without sedation. Her skin requires constant moisture, and she secretes a natural red oil known as blood sweat that acts as sunscreen and antibiotic. Bubbles consumes about 80 pounds of grass and hay each day, along with melons and vegetables as treats. She surfaces every few minutes to breathe automatically, even in her sleep — an instinct that never turns off. Her gaping yawns, which reveal enormous canine teeth, have become one of the most photographed sights at the zoo.` },
+      {
+        name: 'Baboon', personalName: 'Kato', img: 'assets/Baboon.jpg',
+        desc: 'Highly social primates that live in large troops across African savannas.',
+        history: `Kato was born into a large troop of olive baboons in Kenya's Masai Mara, but was rejected by his mother at just three days old — a rare but natural occurrence in baboon society. He was rescued by researchers studying the troop and transferred to a primate rehabilitation center.
+
+        At PromisesZOO, Kato is the undisputed alpha male of a troop of 12 baboons. He earned his position through a combination of strategic alliances and displays of strength, though keepers note he rules with more diplomacy than aggression. Baboons have one of the most complex social structures in the animal kingdom, with intricate hierarchies, friendships, and political maneuvering that rival human societies.
+
+        Kato is exceptionally intelligent — he has learned to use a touchscreen computer as part of a cognitive research program, identifying shapes and colors in exchange for fruit rewards. He can recognize himself in mirrors, understand cause and effect, and has even been observed what appears to be teaching younger baboons how to open stubborn enrichment devices. Kato is known for his expressive face and dramatic moods — one moment he might be grooming a subordinate, the next he could be barking warnings at a perceived threat. He maintains order in his troop through a complex network of social bonds and always eats first, a privilege he enforces with a sharp glance. Baboons are omnivores, and Kato's diet includes fruits, vegetables, nuts, seeds, insects, and occasionally small amounts of cooked meat. His canine teeth are over an inch long and are displayed prominently during status confrontations.` },
+      {
+        name: 'Fox', personalName: 'Rusty', img: 'assets/Fox.jpg',
+        desc: 'Small, clever canids known for their bushy tails and adaptability.',
+        history: `Rusty was found as a tiny kit in an abandoned den in rural Oregon after his mother was killed by a coyote. He was brought to a wildlife rehabilitation center where he was raised alongside several other orphaned fox kits. Because he was handled by humans during his critical developmental window, Rusty became habituated and could not be released into the wild.
+
+        He arrived at PromisesZOO's educational program in 2022 and has proven to be an exceptional ambassador for his species. Foxes are among the most adaptable mammals on Earth, found on every continent except Antarctica, and Rusty embodies this adaptability. He is equally comfortable in his naturalistic enclosure as he is visiting classrooms and community events.
+
+        Rusty's most distinctive feature is his magnificent bushy tail, or brush, which he uses for balance, warmth, and communication. When he sleeps, he curls his tail around his body like a living blanket. His coat changes with the seasons — thicker and grayer in winter, shorter and redder in summer. Rusty has an extraordinary sense of hearing, capable of detecting a mouse squeaking from 100 feet away. In his educational presentations, he demonstrates his hunting technique by pouncing on hidden toys with dramatic precision. Rusty is known for his playful personality — he chases his own tail, plays fetch with keepers, and has a favorite squeaky toy shaped like a hedgehog that he carries everywhere. His diet includes high-quality dry dog food, raw meat, fruits, and vegetables, totaling about 1 pound daily. Despite weighing only 12 pounds, Rusty has the personality of an animal five times his size.` },
+      {
+        name: 'Red Fox', personalName: 'Vixen', img: 'assets/Red Fox.jpg',
+        desc: 'The most widespread fox species, known for its striking red fur.',
+        history: `Vixen was rescued from a fur farm in the Midwest where she had spent the first year of her life in a small wire cage. When the farm was shut down for animal cruelty violations, Vixen was one of 50 surviving foxes found — many had not survived the harsh conditions. She was emaciated, fearful, and had developed stereotypic pacing behaviors from the confinement.
+
+        The transition to PromisesZOO was slow and careful. For the first three months, Vixen would flatten herself against the ground whenever a keeper approached, trembling. Her dedicated caretaker, James, spent hours simply sitting in her enclosure, reading aloud and tossing treats in her direction without making eye contact. Gradually, Vixen began to trust. The first time she took a piece of chicken from James's hand was celebrated as a major milestone by the entire animal care team.
+
+        Today, Vixen is a transformed animal. Her deep red coat — the characteristic that made her a target for the fur trade — is now her crowning glory. She has a striking white-tipped tail and black stockings on her legs. Vixen is particularly active during dawn and dusk, true to her crepuscular nature. She has a complex vocabulary of vocalizations — 28 distinct sounds that researchers have cataloged — including barks, whines, and a eerie, high-pitched scream that can be startling to those hearing it for the first time. Vixen is the star of the zoo's educational programming about wildlife trafficking, serving as a living testament to why the fur trade must end. Her story has inspired thousands of visitors to support animal welfare legislation. She eats about 1.5 pounds of food daily, with a particular fondness for blueberries and raw eggs.` },
+      {
+        name: 'Lynx', personalName: 'Luna', img: 'assets/Lynks.jpg',
+        desc: 'A medium-sized wild cat with tufted ears and a short, bobbed tail.',
+        history: `Luna was found as an orphaned kitten in the boreal forests of Canada, likely abandoned after her mother was killed by a trapper. She was barely four weeks old and weighed less than a pound when she was discovered, shivering beneath a spruce tree. Her distinctive ear tufts were barely visible, and her eyes still had the blue haze of infancy.
+
+        She was flown to a specialized wild cat rescue in Montana, where she was raised alongside another orphaned lynx kitten named Orion. The two became inseparable, wrestling and hunting together as they grew. Luna emerged as the dominant of the pair, always the first to investigate new objects and the last to retreat from challenges.
+
+        At PromisesZOO, Luna lives in a cool, forested enclosure that mimics her native habitat. Canada lynx are specially adapted for life in the snow — their enormous, fur-covered paws act like natural snowshoes, allowing them to hunt snowshoe hares (their primary prey) even in deep powder. Luna's ear tufts are not just decorative — they enhance her hearing by funneling sound into her ears, allowing her to detect prey moving beneath snow. Her short, black-tipped bobtail is a defining feature of lynx, distinguishing them from other wild cats. Luna is remarkably heat-sensitive despite her thick fur; she spends hot days draped over cool rocks or lying in her air-conditioned den. Her keepers describe her as having a regal, aloof personality — she observes the world with a quiet intensity, rarely wasting energy on unnecessary movement. She hunts small prey items in her enclosure, practices her stalking technique on keepers (who play along), and eats about 3 pounds of meat each day. Her favorite enrichment is scent trails — keepers drag rabbit fur through her enclosure, and she follows the trail with focused determination.` },
+      {
+        name: 'Wolf', personalName: 'Raven', img: 'assets/Wolves.jpg',
+        desc: 'Majestic pack hunters that roam forests and tundra across the Northern Hemisphere.',
+        history: `Raven was born in a captive breeding facility dedicated to preserving the genetic diversity of gray wolves. His lineage can be traced back to wolves from the Yukon Territory, and he carries the genes of one of the largest wolf subspecies in North America. From birth, Raven displayed the characteristics of a future alpha — larger than his littermates, more confident, and possessing a deep, commanding presence.
+
+        At PromisesZOO, Raven is the alpha male of a pack of seven wolves. He leads his pack with a quiet authority that requires few physical confrontations — a dominant stare or a low growl is usually enough to maintain order. Wolf pack hierarchy is complex and essential for survival. Raven eats first, leads the pack during patrols, and is the primary decision-maker for the group's movements and activities. The pack functions as a family unit, with Raven and his mate, a gray wolf named Sierra, at its center.
+
+        Wolves are among the most misunderstood animals in the world. Once exterminated across much of their range, they have made a remarkable comeback thanks to conservation efforts. Raven serves as an ambassador for his kind, helping visitors understand the critical role wolves play in maintaining healthy ecosystems. When wolves were reintroduced to Yellowstone National Park in 1995, the entire ecosystem transformed — overgrazing decreased, riverbanks stabilized, and biodiversity flourished. Raven's howl is a unforgettable sound — a deep, resonant call that rises and falls, often answered by his pack in a chorus that sends chills down the spines of visitors lucky enough to hear it. He eats about 8 to 10 pounds of meat daily, and his pack's territory at the zoo spans nearly an acre of forested habitat. During full moons, the pack is particularly vocal, their ancestral instincts responding to the bright light that once guided their hunting forays across prehistoric landscapes.` },
+    ]
+
+    const grid = document.getElementById('animalGrid')
+    const seeMoreBtn = document.getElementById('seeMoreBtn')
+    let showAll = false
+
+    // ── Modal elements ──
+    const modalOverlay = document.getElementById('modalOverlay')
+    const modalClose = document.getElementById('modalClose')
+    const modalImg = document.getElementById('modalImg')
+    const modalBody = document.getElementById('modalBody')
+
+    function openModal(animal) {
+      modalImg.src = animal.img
+      modalImg.alt = animal.name
+      modalBody.innerHTML = `
+        <h2>${animal.personalName}</h2>
+        <span class="modal-species">${animal.name}</span>
+        <h3>📋 Quick Facts</h3>
+        <p>${animal.desc}</p>
+        <h3>📖 Full History</h3>
+        <p>${animal.history.replace(/\n\s{8}/g, '</p><p>')}</p>
+      `
+      modalOverlay.classList.add('open')
+      document.body.style.overflow = 'hidden'
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('open')
+      document.body.style.overflow = ''
+    }
+
+    modalClose.addEventListener('click', closeModal)
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal()
+    })
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal()
+    })
+
+    function renderAnimals() {
+      grid.innerHTML = ''
+      const visible = showAll ? animals : animals.slice(0, 3)
+
+      visible.forEach((animal) => {
+        const card = document.createElement('div')
+        card.className = 'animal-card'
+        card.style.cursor = 'pointer'
+        card.innerHTML = `
+          <img src="${animal.img}" alt="${animal.name}" loading="lazy" onerror="this.style.display='none'" />
+          <div class="animal-card-body">
+            <h3>${animal.personalName} <span style="font-weight:400;color:var(--text-light);font-size:0.85rem">(${animal.name})</span></h3>
+            <p>${animal.desc}</p>
+          </div>
+        `
+        card.addEventListener('click', () => openModal(animal))
+        grid.appendChild(card)
+      })
+
+      seeMoreBtn.textContent = showAll ? 'Show Less ↑' : 'See More Animals ↓'
+    }
+
+    renderAnimals()
+
+    seeMoreBtn.addEventListener('click', () => {
+      showAll = !showAll
+      renderAnimals()
+    })
+
+    // ── Navbar ──
+    const navbar = document.getElementById('navbar')
+    const hamburger = document.getElementById('hamburger')
+    const navLinks = document.getElementById('navLinks')
+    const navOverlay = document.getElementById('navOverlay')
+    const navAnchors = document.querySelectorAll('.nav-links a')
+    const sections = document.querySelectorAll('.active-section')
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50)
+    })
+
+    function openMenu() {
+      hamburger.classList.add('open')
+      navLinks.classList.add('open')
+      navOverlay.classList.add('visible')
+      document.body.style.overflow = 'hidden'
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open')
+      navLinks.classList.remove('open')
+      navOverlay.classList.remove('visible')
+      document.body.style.overflow = ''
+    }
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.contains('open') ? closeMenu() : openMenu()
+    })
+
+    navOverlay.addEventListener('click', closeMenu)
+
+    navAnchors.forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault()
+        const page = anchor.dataset.page
+        navAnchors.forEach((a) => a.classList.remove('active'))
+        anchor.classList.add('active')
+        sections.forEach((section) => section.classList.remove('visible'))
+        document.getElementById('section-' + page).classList.add('visible')
+        closeMenu()
+      })
+    })
+  </script>
+</body>
+</html>
