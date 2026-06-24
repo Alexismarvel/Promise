@@ -27,6 +27,31 @@
       color: var(--text-dark);
       min-height: 100vh;
     }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.3); }
+      50% { box-shadow: 0 0 0 20px rgba(82, 183, 136, 0); }
+    }
+    .page > * {
+      animation: fadeUp 0.7s ease both;
+    }
+    .page > :nth-child(1) { animation-delay: 0.05s; }
+    .page > :nth-child(2) { animation-delay: 0.12s; }
+    .page > :nth-child(3) { animation-delay: 0.20s; }
+    .page > :nth-child(4) { animation-delay: 0.28s; }
+    .page > :nth-child(5) { animation-delay: 0.36s; }
+    .page > :nth-child(6) { animation-delay: 0.44s; }
+    .page > :nth-child(7) { animation-delay: 0.52s; }
+
     .header-bar {
       background: var(--primary-dark);
       padding: 16px 24px;
@@ -54,17 +79,54 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 60px 24px;
+      position: relative;
     }
-    .page h1 {
-      font-size: 2.5rem;
-      color: var(--primary-dark);
-      margin-bottom: 16px;
-    }
-    .page .lead {
-      font-size: 1.2rem;
-      color: var(--text-medium);
-      line-height: 1.7;
+
+    /* ── Hero background image ── */
+    .page-head {
+      position: relative;
+      padding: 40px 32px;
       margin-bottom: 40px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(26,77,46,0.92), rgba(45,106,79,0.80));
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .page-head::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('assets/Lion.jpg') center / cover no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .page-head::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('assets/logo-icon.png') right 24px center / 120px no-repeat;
+      opacity: 0.10;
+      z-index: 0;
+    }
+    .page-head h1,
+    .page-head .lead {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+    .page-head h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    .page-head .lead {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      margin-bottom: 0;
+      color: rgba(255,255,255,0.9);
+      max-width: 700px;
     }
 
     .section-block {
@@ -74,6 +136,12 @@
       margin-bottom: 24px;
       box-shadow: var(--shadow-md);
       border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .section-block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
     }
     .section-block h2 {
       font-size: 1.5rem;
@@ -118,11 +186,35 @@
       padding: 28px 16px;
       text-align: center;
       box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
     }
+    .stat-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--primary-light);
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .stat-card:nth-child(1)::after { background: #ffb703; }
+    .stat-card:nth-child(2)::after { background: #52b788; }
+    .stat-card:nth-child(3)::after { background: #fb8500; }
+    .stat-card:nth-child(4)::after { background: #2d6a4f; }
     .stat-card .number {
       font-size: 2.5rem;
       font-weight: 800;
       color: var(--primary);
+      transition: color 0.3s ease;
+    }
+    .stat-card:hover .number {
+      color: var(--primary-dark);
     }
     .stat-card .label {
       font-size: 0.9rem;
@@ -131,11 +223,21 @@
     }
 
     .cta-box {
-      background: var(--primary-dark);
+      background: linear-gradient(135deg, var(--primary-dark), #143b26);
       border-radius: var(--radius-md);
       padding: 40px;
       text-align: center;
       margin-top: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,183,3,0.06), transparent 60%);
+      pointer-events: none;
     }
     .cta-box h2 {
       color: #fff;
@@ -156,9 +258,13 @@
       border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 1.05rem;
-      transition: background 0.25s ease;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .cta-box .btn-cta:hover { background: var(--accent-orange); }
+    .cta-box .btn-cta:hover {
+      background: var(--accent-orange);
+      transform: scale(1.06);
+      box-shadow: 0 6px 20px rgba(251,133,0,0.4);
+    }
 
     footer {
       text-align: center;
@@ -173,6 +279,7 @@
     @media (max-width: 600px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .page h1 { font-size: 1.8rem; }
+      .page-head { padding: 28px 20px; min-height: 160px; }
       .cta-box { padding: 24px; }
     }
   </style>
@@ -187,8 +294,10 @@
   </div>
 
   <div class="page">
-    <h1>About PromisesZOO</h1>
-    <p class="lead">A sanctuary built on passion, care, and conservation. Since 1998, we have been a home for over 200 species from around the world.</p>
+    <div class="page-head">
+      <h1>About PromisesZOO</h1>
+      <p class="lead">A sanctuary built on passion, care, and conservation. Since 1998, we have been a home for over 200 species from around the world.</p>
+    </div>
 
     <div class="stats-grid">
       <div class="stat-card">

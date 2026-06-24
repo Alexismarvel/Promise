@@ -413,12 +413,15 @@
       gap: 24px;
     }
     .home-features .feat {
+      display: block;
       background: var(--bg-white);
       border-radius: var(--radius-md);
       padding: 36px 24px;
       box-shadow: var(--shadow-sm);
       border: 1px solid rgba(0,0,0,0.05);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      cursor: pointer;
     }
     .home-features .feat:hover {
       transform: translateY(-4px);
@@ -427,6 +430,7 @@
     .home-features .feat .icon {
       font-size: 2.5rem;
       margin-bottom: 14px;
+      display: block;
     }
     .home-features .feat h3 {
       font-size: 1.15rem;
@@ -1313,21 +1317,21 @@
       <h2>Why Visit PromisesZOO</h2>
       <p class="section-sub">Every visit supports our mission of conservation, education, and exceptional animal care.</p>
       <div class="home-features">
-        <div class="feat">
-          <div class="icon">🦒</div>
+        <a href="tours.html" class="feat">
+          <span class="icon">🦒</span>
           <h3>Guided Tours</h3>
           <p>Expert naturalists lead you through our exhibits, sharing fascinating stories about each species and their natural habitats.</p>
-        </div>
-        <div class="feat">
-          <div class="icon">🌿</div>
+        </a>
+        <a href="conservation.html" class="feat">
+          <span class="icon">🌿</span>
           <h3>Conservation First</h3>
           <p>We participate in Species Survival Plan programs for endangered species and fund field conservation across four continents.</p>
-        </div>
-        <div class="feat">
-          <div class="icon">👨‍👩‍👧‍👦</div>
+        </a>
+        <a href="family-fun.html" class="feat">
+          <span class="icon">👨‍👩‍👧‍👦</span>
           <h3>Fun for All Ages</h3>
           <p>Interactive exhibits, feeding sessions, and educational shows make every visit an adventure the whole family will treasure.</p>
-        </div>
+        </a>
       </div>
     </div>
 

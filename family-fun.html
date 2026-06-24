@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fun for All Ages — PromisesZOO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-dark: #1a4d2e;
+      --primary: #2d6a4f;
+      --primary-light: #52b788;
+      --accent-yellow: #ffb703;
+      --accent-orange: #fb8500;
+      --bg-white: #ffffff;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b1b1b;
+      --text-medium: #4a4a4a;
+      --text-light: #6b7280;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+    .header-bar {
+      background: var(--primary-dark);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .header-bar .back-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+    .header-bar .back-link:hover { color: #fff; }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .page h1 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+    .page .lead {
+      font-size: 1.15rem;
+      color: var(--text-medium);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .activity {
+      display: flex;
+      gap: 24px;
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.06);
+      align-items: flex-start;
+    }
+    .activity .emoji {
+      font-size: 3rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .activity .info h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .activity .info .age {
+      font-size: 0.85rem;
+      color: var(--primary-light);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .activity .info p {
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      line-height: 1.65;
+    }
+
+    .cta-box {
+      background: var(--primary-dark);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      text-align: center;
+      margin-top: 28px;
+    }
+    .cta-box h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 18px;
+    }
+    .cta-box .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      transition: background 0.25s ease;
+    }
+    .cta-box .btn:hover { background: var(--accent-orange); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid #e5e7eb;
+      background: var(--bg-white);
+    }
+
+    @media (max-width: 600px) {
+      .activity { flex-direction: column; }
+      .page h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <a href="navbar.html">PromisesZOO</a>
+    <a href="navbar.html" class="back-link">&larr; Back to Home</a>
+  </div>
+  <div class="page">
+    <h1>Fun for All Ages</h1>
+    <p class="lead">From toddlers to grandparents, there is something for everyone at PromisesZOO. Explore, learn, and play together.</p>
+
+    <div class="activity">
+      <div class="emoji">🖐️</div>
+      <div class="info">
+        <h3>Interactive Animal Encounters</h3>
+        <span class="age">All ages · Included with admission</span>
+        <p>Get up close with gentle ambassador animals at our daily encounter stations. Pet a tortoise, marvel at a macaw, or watch a snake slither by — with expert keepers guiding every moment.</p>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="emoji">🎨</div>
+      <div class="info">
+        <h3>Wildlife Craft Corner</h3>
+        <span class="age">Ages 3–12 · Free</span>
+        <p>Let your little ones unleash their creativity at our craft station. Make animal masks, paint paw prints, and create nature-inspired art to take home as a souvenir.</p>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="emoji">🍦</div>
+      <div class="info">
+        <h3>Family Picnic &amp; Play Areas</h3>
+        <span class="age">All ages · Free</span>
+        <p>Take a break at our shaded picnic grove with tables, benches, and a natural playground. Grab a snack from the Safari Cafe or bring your own lunch and enjoy the scenery.</p>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="emoji">📚</div>
+      <div class="info">
+        <h3>Keeper Talks &amp; Feeding Shows</h3>
+        <span class="age">All ages · Daily schedule</span>
+        <p>Watch our animal care team in action during scheduled talks and feeding demonstrations. Learn how we train, enrich, and care for the animals — and ask your burning questions.</p>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="emoji">🚂</div>
+      <div class="info">
+        <h3>Zoo Express Train</h3>
+        <span class="age">All ages · $8/person</span>
+        <p>Hop on the Zoo Express for a relaxing ride through the park. The train stops at four stations, so you can explore each zone at your own pace.</p>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h2>Plan Your Family Adventure</h2>
+      <p>Check our daily schedule and book your tickets for a day of discovery and delight.</p>
+      <a href="book.html" class="btn">Book Tickets</a>
+    </div>
+  </div>
+  <footer>&copy; 2026 PromisesZOO. All rights reserved.</footer>
+</body>
+</html>

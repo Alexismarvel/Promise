@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conservation — PromisesZOO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-dark: #1a4d2e;
+      --primary: #2d6a4f;
+      --primary-light: #52b788;
+      --accent-yellow: #ffb703;
+      --accent-orange: #fb8500;
+      --bg-white: #ffffff;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b1b1b;
+      --text-medium: #4a4a4a;
+      --text-light: #6b7280;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+    .header-bar {
+      background: var(--primary-dark);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .header-bar .back-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+    .header-bar .back-link:hover { color: #fff; }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .page h1 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+    .page .lead {
+      font-size: 1.15rem;
+      color: var(--text-medium);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .section-block {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .section-block h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-block p {
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      line-height: 1.65;
+    }
+    .section-block ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .section-block ul li {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+    .section-block ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .highlight {
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .highlight h2 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .highlight p {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .cta-box {
+      background: var(--primary-dark);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      text-align: center;
+      margin-top: 28px;
+    }
+    .cta-box h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 18px;
+    }
+    .cta-box .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      transition: background 0.25s ease;
+    }
+    .cta-box .btn:hover { background: var(--accent-orange); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid #e5e7eb;
+      background: var(--bg-white);
+    }
+
+    @media (max-width: 600px) {
+      .page h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <a href="navbar.html">PromisesZOO</a>
+    <a href="navbar.html" class="back-link">&larr; Back to Home</a>
+  </div>
+  <div class="page">
+    <h1>Conservation First</h1>
+    <p class="lead">We believe zoos have a responsibility to protect wildlife. Every program, partnership, and habitat is built with conservation at its core.</p>
+
+    <div class="highlight">
+      <h2>Species Survival Plan</h2>
+      <p>PromisesZOO participates in over 15 SSP breeding programs for endangered species, including black rhinos, western gorillas, orangutans, and polar bears. These carefully managed programs maintain genetic diversity and ensure viable populations for the future.</p>
+    </div>
+
+    <div class="section-block">
+      <h2>Field Conservation</h2>
+      <p>We fund and partner with conservation projects across four continents. Our support helps protect critical habitats, combat poaching, and support local communities in coexisting with wildlife. In the past year alone, we contributed over $250,000 to field programs.</p>
+      <ul>
+        <li>Rhino protection units in South Africa</li>
+        <li>Rainforest restoration in Borneo</li>
+        <li>Sea turtle nesting beach preservation in Costa Rica</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2>Research &amp; Veterinary Science</h2>
+      <p>Our on-site veterinary team conducts groundbreaking research in reproductive biology, nutritional science, and wildlife medicine. We collaborate with universities worldwide to advance the science of animal care and conservation.</p>
+    </div>
+
+    <div class="section-block">
+      <h2>Education &amp; Advocacy</h2>
+      <p>Every visit to PromisesZOO is an opportunity to learn. Our education programs reach over 50,000 students annually through school visits, workshops, and outreach programs, inspiring the next generation of conservationists.</p>
+    </div>
+
+    <div class="cta-box">
+      <h2>Support Our Mission</h2>
+      <p>Every ticket, membership, and animal adoption directly funds our conservation work.</p>
+      <a href="navbar.html" class="btn" style="margin-right:12px;">View Tickets</a>
+      <a href="navbar.html" class="btn" style="background:transparent;border:2px solid rgba(255,255,255,0.6);color:#fff;">Learn More</a>
+    </div>
+  </div>
+  <footer>&copy; 2026 PromisesZOO. All rights reserved.</footer>
+</body>
+</html>

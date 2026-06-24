@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guided Tours — PromisesZOO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-dark: #1a4d2e;
+      --primary: #2d6a4f;
+      --primary-light: #52b788;
+      --accent-yellow: #ffb703;
+      --accent-orange: #fb8500;
+      --bg-white: #ffffff;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b1b1b;
+      --text-medium: #4a4a4a;
+      --text-light: #6b7280;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+    .header-bar {
+      background: var(--primary-dark);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    .header-bar .back-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+    .header-bar .back-link:hover { color: #fff; }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .page h1 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+    .page .lead {
+      font-size: 1.15rem;
+      color: var(--text-medium);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .tour-detail {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .tour-detail h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .tour-detail .meta {
+      font-size: 0.9rem;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .tour-detail p {
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      line-height: 1.65;
+    }
+    .tour-detail ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .tour-detail ul li {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      padding: 3px 0 3px 22px;
+      position: relative;
+    }
+    .tour-detail ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .cta-box {
+      background: var(--primary-dark);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      text-align: center;
+      margin-top: 28px;
+    }
+    .cta-box h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 18px;
+    }
+    .cta-box .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      transition: background 0.25s ease;
+    }
+    .cta-box .btn:hover { background: var(--accent-orange); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid #e5e7eb;
+      background: var(--bg-white);
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <a href="navbar.html">PromisesZOO</a>
+    <a href="navbar.html" class="back-link">&larr; Back to Home</a>
+  </div>
+  <div class="page">
+    <h1>Guided Tours</h1>
+    <p class="lead">Let our expert naturalists take you on a journey through the wild. Every tour is designed to educate, inspire, and create lasting memories.</p>
+
+    <div class="tour-detail">
+      <h3>Discovery Walk</h3>
+      <span class="meta">90 minutes · $29/person · Daily 10 AM &amp; 2 PM</span>
+      <p>A guided stroll through our main exhibits. Meet our animal ambassadors, learn about their behaviors, and hear the stories behind each habitat. Perfect for first-time visitors.</p>
+      <ul>
+        <li>Lion &amp; tiger viewing platforms</li>
+        <li>Elephant encounter station</li>
+        <li>Interactive Q&amp;A with keeper</li>
+      </ul>
+    </div>
+
+    <div class="tour-detail">
+      <h3>Sunset Safari</h3>
+      <span class="meta">2 hours · $59/person · Daily at 5 PM</span>
+      <p>Experience the zoo as dusk falls and nocturnal animals awaken. Includes a campfire dinner and stargazing session on the lawn.</p>
+      <ul>
+        <li>Twilight animal observations</li>
+        <li>Night-vision equipment provided</li>
+        <li>Campfire dinner included</li>
+      </ul>
+    </div>
+
+    <div class="tour-detail">
+      <h3>VIP Behind the Scenes</h3>
+      <span class="meta">3 hours · $149/person · By reservation</span>
+      <p>Go where guests don't usually go. Meet keepers, prepare enrichment items, and get up close with some of our most incredible animals.</p>
+      <ul>
+        <li>Private keeper meet &amp; greet</li>
+        <li>Enrichment preparation workshop</li>
+        <li>Complimentary meal &amp; drink</li>
+        <li>Personalized souvenir photo</li>
+      </ul>
+    </div>
+
+    <div class="cta-box">
+      <h2>Ready to Explore?</h2>
+      <p>Book your guided tour today and see the zoo through the eyes of an expert.</p>
+      <a href="book.html" class="btn">Book a Tour</a>
+    </div>
+  </div>
+  <footer>&copy; 2026 PromisesZOO. All rights reserved.</footer>
+</body>
+</html>
